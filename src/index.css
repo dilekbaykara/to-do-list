@@ -15,7 +15,7 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 4rem);
-  margin-left: 2rem;
+  margin-left: 1.5rem;
   align-items: center;
   margin-right: 1rem;
 }
@@ -40,9 +40,11 @@ body {
   grid-row: 2;
   flex-direction: column;
   align-items: flex-start;
+  font-size: 18px;
 }
 
 .current-date{
+  font-size: 15px;
   color:#566995;
 }
 

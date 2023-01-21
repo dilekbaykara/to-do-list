@@ -48,6 +48,7 @@ function ToDoItem(props: { toDo: ToDo }) {
   return (
     <div className ="to-do-item">
       <input type="checkbox" className="checkbox" checked={props.toDo.checked} />
+      <h2>{props.toDo.title}</h2>
       <span>{props.toDo.description}</span>
       <br />
       <span>{props.toDo.duedate.toLocaleDateString()}</span>
