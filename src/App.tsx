@@ -5,10 +5,7 @@ function Greeting() {
   let timeOfDay;
   const date = new Date();
   const hours = date.getHours();
-  const styles = {
-    fontSize: 60,
-    
-  }
+
 
   if (hours < 12) {
     timeOfDay = 'Morning';
@@ -19,7 +16,7 @@ function Greeting() {
   }
 
   return (
-    <h1 style={styles}> Good {timeOfDay}</h1>
+    <h1>Good {timeOfDay}</h1>
   )
 };
 
@@ -75,13 +72,14 @@ function App(): JSX.Element {
   return (
     <div className="App">
       <div className="greeting-container">
-      <Greeting/>
-      </div>
+      <div className="greeting"><Greeting/></div>
+      <button className="task-button">New Task</button>
       <div className="date-container">
       Today is {new Date().toLocaleString("en-US", { weekday: 'long'})}
       <br/>
       <div className="current-date">
       {new Date().toLocaleString("en-US", { month: "long", day: '2-digit'})}, {new Date().getFullYear()}
+      </div>
       </div>
       </div>
       <div className="task-container">

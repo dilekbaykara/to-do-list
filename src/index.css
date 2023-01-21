@@ -11,17 +11,48 @@ body {
 
 
 .greeting-container{
-  display: flex;
-  align-content: center;
-  justify-content: flex-start;
-  margin-left: 2.5rem;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 4rem);
+  margin-left: 2rem;
+  align-items: center;
+  margin-right: 1rem;
 }
+
+.greeting{
+  grid-column: 1;
+  grid-row: 1;
+  width: 19rem;
+}
+
+.task-button{
+  font-size: 1rem;
+  grid-column: 5;
+  grid-row: 1;
+  height: 3rem;
+  width: 7rem;
+}
+
+.date-container {
+  display: flex;
+  grid-column: 1;
+  grid-row: 2;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.current-date{
+  color:#566995;
+}
+
 
 h1{
   font-family: elza, sans-serif;
   font-weight: 500;
   font-style: normal;
   color:#6889f7;
+  font-size: 50px;
 }
 
 hr{
@@ -31,18 +62,6 @@ hr{
  width: 93%;
 }
 
-.date-container {
-  display: flex;
-  align-items:flex-start;
-  flex-direction: column;
-  padding-left: 2.5rem;
-  padding-right: 2rem;
-  margin: 0;
-}
-
-.current-date{
-  color:#566995;
-}
 
 .task-container {
   display: grid;
@@ -55,11 +74,13 @@ hr{
 .task-counter{
   grid-column: 1;
   grid-row: 1;
+  width: 10rem;
 }
 
 .status-container{
   grid-column: 5;
   grid-row: 1;
+  width: 10rem;
 }
 
 button{
