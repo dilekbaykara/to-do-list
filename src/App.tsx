@@ -1,5 +1,27 @@
 import "./App.css";
 //import { useState } from "react";//
+// Time of day Greeting for User at top of page
+function Greeting() {
+  let timeOfDay;
+  const date = new Date();
+  const hours = date.getHours();
+  const styles = {
+    fontSize: 60,
+    
+  }
+
+  if (hours < 12) {
+    timeOfDay = 'Morning';
+  } else if (hours >= 12 && hours < 17) {
+    timeOfDay = 'Afternoon';
+  } else {
+    timeOfDay = 'Evening';
+  }
+
+  return (
+    <h1 style={styles}> Good {timeOfDay}</h1>
+  )
+};
 
 interface ToDo {
   title: string;
@@ -52,10 +74,22 @@ function ToDoItem(props: { toDo: ToDo }) {
 function App(): JSX.Element {
   return (
     <div className="App">
-      <h1>To-Do-List</h1>
+      <div className="greeting-container">
+      <Greeting/>
+      </div>
       <div className="date-container">
-      <p>Today is Saturday</p>
-      {new Date().toLocaleString("en-US", { month: "short", day: '2-digit'})}, {new Date().getFullYear()}
+      Today is {new Date().toLocaleString("en-US", { weekday: 'long'})}
+      <br/>
+      <div className="current-date">
+      {new Date().toLocaleString("en-US", { month: "long", day: '2-digit'})}, {new Date().getFullYear()}
+      </div>
+      </div>
+      <div className="task-container">
+      <div className="task-counter">2 Tasks</div>
+      <div className="status-container">
+        <button>Active</button>
+        <button>Done</button>
+      </div>
       </div>
       <hr/>
       <ToDoItem toDo={myToDo1} />

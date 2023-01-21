@@ -10,11 +10,66 @@ body {
 }
 
 
+.greeting-container{
+  display: flex;
+  align-content: center;
+  justify-content: flex-start;
+  margin-left: 2.5rem;
+}
+
 h1{
+  font-family: elza, sans-serif;
+  font-weight: 500;
+  font-style: normal;
   color:#6889f7;
-  letter-spacing: .1rem;
 }
 
 hr{
-  width: 50rem;
+ display: flex;
+ margin-top: 1rem;
+ margin-bottom: 1rem;
+ width: 93%;
+}
+
+.date-container {
+  display: flex;
+  align-items:flex-start;
+  flex-direction: column;
+  padding-left: 2.5rem;
+  padding-right: 2rem;
+  margin: 0;
+}
+
+.current-date{
+  color:#566995;
+}
+
+.task-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 2rem;
+  font-size: 2rem;
+  color:#6889f7;
+}
+
+.task-counter{
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.status-container{
+  grid-column: 5;
+  grid-row: 1;
+}
+
+button{
+  font-family: elza, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  border: 1px solid #6889f7;
+  border-radius: 19px;
+  color:#ffff;
+  padding: 9px;
+  background-color: #131b2d;
+  width: 4rem;
 }
