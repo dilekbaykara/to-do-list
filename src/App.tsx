@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+//import { useState } from "react";//
 
 interface ToDo {
   title: string;
@@ -27,8 +27,8 @@ const myToDo2: ToDo = {
 
 function ToDoItem(props: { toDo: ToDo }) {
   return (
-    <div>
-      <input type="checkbox" checked={props.toDo.checked} />
+    <div className ="to-do-item">
+      <input type="checkbox" className="checkbox" checked={props.toDo.checked} />
       <span>{props.toDo.description}</span>
       <br />
       <span>{props.toDo.duedate.toLocaleDateString()}</span>
@@ -36,7 +36,8 @@ function ToDoItem(props: { toDo: ToDo }) {
   );
 }
 
-function Example() {
+//Set Counter example below//
+/**function Example() {
   // Declare a new state variable, which we'll call "count"
   const [count, setCount] = useState<number>(0);
 
@@ -46,13 +47,17 @@ function Example() {
       <button onClick={() => setCount(count + 1)}>Click me</button>
     </div>
   );
-}
+}**/
 
 function App(): JSX.Element {
   return (
     <div className="App">
       <h1>To-Do-List</h1>
-      <Example />
+      <div className="date-container">
+      <p>Today is Saturday</p>
+      {new Date().toLocaleString("en-US", { month: "short", day: '2-digit'})}, {new Date().getFullYear()}
+      </div>
+      <hr/>
       <ToDoItem toDo={myToDo1} />
       <ToDoItem toDo={myToDo2} />
     </div>

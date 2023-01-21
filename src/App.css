@@ -1,3 +1,27 @@
 .App {
   text-align: center;
 }
+
+.to-do-item{
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  background-color: #fefa85;
+  border: 1px #ffff;
+  color: #131b2d;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  }
+  
+  .date-container {
+    display: flex;
+    align-items:flex-start;
+    flex-direction: column;
+    padding-left: 2rem;
+  }
+
+  .checkbox{
+
+
+  }

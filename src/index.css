@@ -9,12 +9,12 @@ body {
   color: #ffff;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
 
 h1{
   color:#6889f7;
   letter-spacing: .1rem;
+}
+
+hr{
+  width: 50rem;
 }
