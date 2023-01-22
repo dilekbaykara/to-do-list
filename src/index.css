@@ -9,7 +9,6 @@ body {
   color: #ffff;
 }
 
-
 .greeting-container{
   margin-top: 1rem;
   display: grid;
@@ -17,13 +16,13 @@ body {
   grid-template-rows: repeat(2, 4rem);
   margin-left: 1.5rem;
   align-items: center;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
 }
 
 .greeting{
   grid-column: 1;
   grid-row: 1;
-  width: 19rem;
+  width: 22.5rem;
 }
 
 .task-button{
@@ -33,6 +32,7 @@ body {
   height: 3rem;
   width: 7rem;
 }
+
 
 .date-container {
   display: flex;
@@ -95,4 +95,9 @@ button{
   padding: 9px;
   background-color: #131b2d;
   width: 4rem;
+}
+
+button:hover{
+  background-color: #6889f7;
+  color:#131b2d;
 }
