@@ -20,12 +20,13 @@ body {
 }
 
 .greeting{
-  grid-column: 1;
+  grid-column: 1 /span 4;
   grid-row: 1;
-  width: 22.5rem;
+  text-align: left;
 }
 
 .task-button{
+  justify-self: end;
   font-size: 1rem;
   grid-column: 5;
   grid-row: 1;
@@ -36,7 +37,7 @@ body {
 
 .date-container {
   display: flex;
-  grid-column: 1;
+  grid-column: 1 /span 4;
   grid-row: 2;
   flex-direction: column;
   align-items: flex-start;
