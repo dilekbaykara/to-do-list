@@ -107,7 +107,7 @@ select{
   justify-content: center;
   align-content: center;
   font-family: elza, sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-style: normal;
   border: 1px solid #6889f7;
   border-radius: 19px;
@@ -116,4 +116,10 @@ select{
   background-color: #131b2d;
   width: 6rem;
   height: 3rem;
+}
+
+
+.submit:hover{
+  background-color: #6889f7;
+  color:#131b2d;
 }
