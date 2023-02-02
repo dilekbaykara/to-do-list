@@ -84,6 +84,7 @@ hr{
   grid-column: 5;
   grid-row: 1;
   width: 10rem;
+  justify-self: end;
 }
 
 button{

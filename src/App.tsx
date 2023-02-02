@@ -110,7 +110,7 @@ function App(): JSX.Element {
 
   if (addingToDo) {
     return (
-      <div>
+      <div className="form-container">
         <form onSubmit={handleFormSubmit}>
           <h1>To Do Form </h1>
           <p>
@@ -141,7 +141,7 @@ function App(): JSX.Element {
             <input name="Description" />
           </p>
           <p>
-            <input type="submit" value="Add" />
+            <input type="submit" value="Add" className="submit" />
           </p>
         </form>
       </div>

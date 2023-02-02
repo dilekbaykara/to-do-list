@@ -47,10 +47,22 @@
   grid-row: 2;
 }
 
+.form-container{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+p{
+  margin: 0.5rem;
+}
+
 form {
   display: flex;
-  justify-content: center;
-  justify-items: center;
+  justify-content: start;
+  justify-items: flex-start;
   font-size: 1.2rem;
   flex-wrap: nowrap;
   flex-direction: column;
@@ -60,6 +72,21 @@ form {
 input {
   display: flex;
   height: 2rem;
-  width: 10rem;
+  width: 30rem;
   border-radius: 10px;
+}
+
+.submit{
+  justify-content: center;
+  align-content: center;
+  font-family: elza, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  border: 1px solid #6889f7;
+  border-radius: 19px;
+  color:#ffff;
+  padding: 9px;
+  background-color: #131b2d;
+  width: 6rem;
+  height: 3rem;
 }
