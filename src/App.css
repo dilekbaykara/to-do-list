@@ -74,7 +74,34 @@ input {
   height: 2rem;
   width: 30rem;
   border-radius: 10px;
+  background-color: #131b2d;
+  border: solid 1px #6889f7;
+  align-content: center;
+  font-family: elza, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color:#ffff;
+  justify-content: center;
+  align-content: center;
 }
+
+select{
+  display: flex;
+  height: 2rem;
+  width: 30rem;
+  border-radius: 10px;
+  background-color: #131b2d;
+  border: solid 1px #6889f7;
+  align-content: center;
+  font-family: elza, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color:#ffff;
+  justify-content: center;
+  align-content: center;
+
+}
+
 
 .submit{
   justify-content: center;
