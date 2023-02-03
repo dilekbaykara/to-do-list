@@ -147,19 +147,19 @@ function App(): JSX.Element {
             <label>Title</label>
           </p>
           <p>
-            <input name="Title" id="title"/>
+            <input name="Title" className="input-field" id="title"/>
           </p>
           <p>
             <label>Due Date</label>
           </p>
           <p>
-            <input name="Date" type="date" id="date" />
+            <input name="Date" type="date" className="input-field" />
           </p>
           <p>
             <label>Priority</label>
           </p>
           <p>
-            <select name="Priority" id="priority">
+            <select name="Priority" className="input-field">
               <option>Important</option>
               <option selected>Normal</option>
             </select>
@@ -168,7 +168,7 @@ function App(): JSX.Element {
             <label>Description</label>
           </p>
           <p>
-            <input name="Description" id="description" />
+            <input name="Description" className="input-field" />
           </p>
           <p>
             <input type="submit" value="Add" className="submit" />

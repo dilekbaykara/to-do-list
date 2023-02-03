@@ -29,6 +29,7 @@
   display: inline-block;
   height: 2rem;
   width: 2rem;
+  margin: 2rem;
 }
 
 .to-do-date {
@@ -71,7 +72,14 @@ form {
   align-items: center;
 }
 
-#description, #priority, #date, #title {
+.to-do-title{
+  font-family: elza, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  width: max-content;
+}
+
+.input-field {
   display: flex;
   height: 2rem;
   width: 30rem;
