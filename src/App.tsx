@@ -2,6 +2,8 @@ import "./App.css";
 import { useState, FormEvent, useEffect } from "react"; //
 import { stringify } from "querystring";
 // Time of day Greeting for User at top of page
+
+
 function Greeting() {
   let timeOfDay;
   const date = new Date();
@@ -42,16 +44,39 @@ const myToDo2: ToDo = {
   title: "To Do",
 };
 
-function ToDoItem(props: { toDo: ToDo }) {
+function Checkbox() {
+  const [checked, setChecked] = useState(false);
+  const handleCheck =() => {
+    setChecked(!checked)
+  }
+  return (
+    <div>
+      <input type="checkbox" checked={checked} onClick={handleCheck} />
+       
+    </div>
+  );
+}
+
+function ToDoItem(props: { toDo: ToDo, handleChange: any})
+
+{
   return (
     <div className="to-do-item">
-      <input
+      <div className="checkbox-title-container">
+      {Checkbox()
+      
+      /* <input
         type="checkbox"
         className="checkbox"
-        checked={props.toDo.checked}
-      />
+        checked={checked}
+        onClick={handleCheck}
+        // onChange={()=>{props.handleChange(props.toDo.checked)}}
+     */}
       <h2 className="to-do-title">{props.toDo.title}</h2>
+      </div>
+      <div className="description-box">
       <span className="description">{props.toDo.description}</span>
+      </div>
       <br />
       <span className="to-do-date">
         {/* {props.toDo.duedate.toLocaleDateString()} */}
@@ -59,6 +84,11 @@ function ToDoItem(props: { toDo: ToDo }) {
     </div>
   );
 }
+
+
+
+
+
 
 //Set Counter example below//
 /**function Example() {
@@ -179,7 +209,7 @@ function App(): JSX.Element {
       {/* <ToDoItem toDo={myToDo1} /> */}
       {/* <ToDoItem toDo={myToDo2} /> */}
       {toDos.map((toDoItem: ToDo) => (
-        <ToDoItem toDo={toDoItem} />
+        <ToDoItem handleChange toDo={toDoItem} />
       ))}
     </div>
   );
