@@ -51,7 +51,7 @@ function Checkbox() {
   }
   return (
     <div>
-      <input type="checkbox" checked={checked} onClick={handleCheck} />
+      <input type="checkbox" id="checkbox" checked={checked} onClick={handleCheck} />
        
     </div>
   );
@@ -147,19 +147,19 @@ function App(): JSX.Element {
             <label>Title</label>
           </p>
           <p>
-            <input name="Title" />
+            <input name="Title" id="title"/>
           </p>
           <p>
             <label>Due Date</label>
           </p>
           <p>
-            <input name="Date" type="date" />
+            <input name="Date" type="date" id="date" />
           </p>
           <p>
             <label>Priority</label>
           </p>
           <p>
-            <select name="Priority">
+            <select name="Priority" id="priority">
               <option>Important</option>
               <option selected>Normal</option>
             </select>
@@ -168,7 +168,7 @@ function App(): JSX.Element {
             <label>Description</label>
           </p>
           <p>
-            <input name="Description" />
+            <input name="Description" id="description" />
           </p>
           <p>
             <input type="submit" value="Add" className="submit" />
