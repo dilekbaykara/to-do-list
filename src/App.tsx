@@ -1,6 +1,10 @@
 import "./App.css";
 import { useState, FormEvent, useEffect } from "react"; //
 import { stringify } from "querystring";
+import { render } from "@testing-library/react";
+import React from "react";
+import { toEditorSettings } from "typescript";
+import ReactDOM from "react-dom";
 // Time of day Greeting for User at top of page
 
 
@@ -44,15 +48,30 @@ const myToDo2: ToDo = {
   title: "To Do",
 };
 
-function Checkbox() {
+
+
+
+// PROBLEM AREA FOR SHOWING FUNCTION FOR DONE BOARD
+function showDone(){
+ReactDOM.render (<input/>, document.querySelector("#checkbox"))
+}
+
+
+//CHECKBOX PROBLEM AREA
+function Checkbox(): JSX.Element {
   const [checked, setChecked] = useState(false);
   const handleCheck =() => {
     setChecked(!checked)
+    if (checked === false)
+    return {showDone}
+    else
+    return function showActive(){
+      }
+    // return showDone()
   }
   return (
     <div>
       <input type="checkbox" id="checkbox" checked={checked} onClick={handleCheck} />
-       
     </div>
   );
 }
@@ -61,18 +80,11 @@ function ToDoItem(props: { toDo: ToDo, handleChange: any})
 
 {
   return (
-    <div className="to-do-item">
+    <div className="to-do-item" id="to-do-item">
       <div className="checkbox-title-container">
-      {Checkbox()
-      
-      /* <input
-        type="checkbox"
-        className="checkbox"
-        checked={checked}
-        onClick={handleCheck}
-        // onChange={()=>{props.handleChange(props.toDo.checked)}}
-     */}
+      {Checkbox()} 
       <h2 className="to-do-title">{props.toDo.title}</h2>
+      <button id="delete">Delete</button>
       </div>
       <div className="description-box">
       <span className="description">{props.toDo.description}</span>
@@ -86,6 +98,15 @@ function ToDoItem(props: { toDo: ToDo, handleChange: any})
 }
 
 
+
+
+
+
+
+
+
+
+  
 
 
 
@@ -201,8 +222,8 @@ function App(): JSX.Element {
       <div className="task-container">
         <div className="task-counter">{toDos.length} {toDos.length === 1 ? "Task" : "Tasks"}</div>
         <div className="status-container">
-          <button>Active</button>
-          <button>Done</button>
+          <button className="activeButton" >Active</button>
+          <button className="doneButton" onClick={showDone}>Done</button>
         </div>
       </div>
       <hr />

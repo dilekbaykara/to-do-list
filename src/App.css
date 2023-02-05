@@ -32,6 +32,25 @@
   margin: 2rem;
 }
 
+/* ADJUST THIS LATER*/
+#delete{
+  font-family: elza, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  border: 1px solid #6889f7;
+  border-radius: 19px;
+  color:#ffff;
+  padding: 9px;
+  background-color: #131b2d;
+  width: 4rem;
+  margin-left: 14rem;
+}
+
+#delete:hover{
+  background-color: #6889f7;
+  color:#131b2d;
+}
+
 .to-do-date {
 }
 
