@@ -33,6 +33,11 @@
 }
 
 /* ADJUST THIS LATER*/
+#delete-div{
+  display: flex;
+  gap: 2rem;
+}
+
 #delete{
   font-family: elza, sans-serif;
   font-weight: 400;
@@ -43,7 +48,7 @@
   padding: 9px;
   background-color: #131b2d;
   width: 4rem;
-  margin-left: 14rem;
+  
 }
 
 #delete:hover{

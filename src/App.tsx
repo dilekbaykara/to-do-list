@@ -7,7 +7,6 @@ import { toEditorSettings } from "typescript";
 import ReactDOM from "react-dom";
 // Time of day Greeting for User at top of page
 
-
 function Greeting() {
   let timeOfDay;
   const date = new Date();
@@ -48,46 +47,54 @@ const myToDo2: ToDo = {
   title: "To Do",
 };
 
-
-
-
 // PROBLEM AREA FOR SHOWING FUNCTION FOR DONE BOARD
-function showDone(){
-ReactDOM.render (<input/>, document.querySelector("#checkbox"))
-}
-
 
 //CHECKBOX PROBLEM AREA
 function Checkbox(): JSX.Element {
   const [checked, setChecked] = useState(false);
-  const handleCheck =() => {
-    setChecked(!checked)
-    if (checked === false)
-    return {showDone}
-    else
-    return function showActive(){
-      }
-    // return showDone()
-  }
+  // function showDone(){
+  //   const toDoList = initialTodos.filter(Checkbox(), checked === true)
+  //   return toDoList
+  // }
+  // const doneToDos = toDoList.map()
+  const handleCheck = () => {
+    setChecked(!checked);
+    if (checked === false) return {};
+    else return function showActive() {};
+  };
   return (
     <div>
-      <input type="checkbox" id="checkbox" checked={checked} onClick={handleCheck} />
+      <input
+        type="checkbox"
+        id="checkbox"
+        checked={checked}
+        onClick={handleCheck}
+      />
     </div>
   );
 }
 
-function ToDoItem(props: { toDo: ToDo, handleChange: any})
+// function deleteToDo(isDeleted: true)
+// { if (isDeleted === true){
+//   return null;
+// }
+// return {ToDoItem}
+// }
 
-{
+function ToDoItem(props: { toDo: ToDo; onDeleteToDo: any }) {
   return (
     <div className="to-do-item" id="to-do-item">
       <div className="checkbox-title-container">
-      {Checkbox()} 
-      <h2 className="to-do-title">{props.toDo.title}</h2>
-      <button id="delete">Delete</button>
+        {Checkbox()}
+        <h2 className="to-do-title">{props.toDo.title}</h2>
+        <div id="delete-div">
+          <button id="delete" onClick={props.onDeleteToDo}>
+            Delete
+          </button>
+        </div>
       </div>
       <div className="description-box">
-      <span className="description">{props.toDo.description}</span>
+        <span className="description">{props.toDo.description}</span>
       </div>
       <br />
       <span className="to-do-date">
@@ -96,20 +103,6 @@ function ToDoItem(props: { toDo: ToDo, handleChange: any})
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
 
 //Set Counter example below//
 /**function Example() {
@@ -124,19 +117,23 @@ function ToDoItem(props: { toDo: ToDo, handleChange: any})
   );
 }**/
 
-const initialTodosString = localStorage.getItem('toDoList')
+const initialTodosString = localStorage.getItem("toDoList");
 
 const initialTodos = initialTodosString
- ? JSON.parse(initialTodosString)
- : [myToDo1, myToDo2]
+  ? JSON.parse(initialTodosString)
+  : [myToDo1, myToDo2];
 
 function App(): JSX.Element {
-  const [toDos, setToDos] = useState(initialTodos);
+  const [toDos, setToDos] = useState<ToDo[]>(initialTodos);
   const [addingToDo, setAddingToDo] = useState(false);
+  
 
-  useEffect(function () {
-    localStorage.setItem('toDoList', JSON.stringify(toDos))
-  }, [ toDos ])
+  useEffect(
+    function () {
+      localStorage.setItem("toDoList", JSON.stringify(toDos));
+    },
+    [toDos]
+  );
 
   function newTask() {
     setAddingToDo(true);
@@ -156,7 +153,7 @@ function App(): JSX.Element {
         checked: false,
       },
     ]);
-    setAddingToDo(false)
+    setAddingToDo(false);
   }
 
   if (addingToDo) {
@@ -168,7 +165,7 @@ function App(): JSX.Element {
             <label>Title</label>
           </p>
           <p>
-            <input name="Title" className="input-field" id="title"/>
+            <input name="Title" className="input-field" id="title" />
           </p>
           <p>
             <label>Due Date</label>
@@ -220,17 +217,29 @@ function App(): JSX.Element {
         </div>
       </div>
       <div className="task-container">
-        <div className="task-counter">{toDos.length} {toDos.length === 1 ? "Task" : "Tasks"}</div>
+        <div className="task-counter">
+          {toDos.length} {toDos.length === 1 ? "Task" : "Tasks"}
+        </div>
         <div className="status-container">
-          <button className="activeButton" >Active</button>
-          <button className="doneButton" onClick={showDone}>Done</button>
+          <button className="activeButton">Active</button>
+          <button className="doneButton">Done</button>
         </div>
       </div>
       <hr />
       {/* <ToDoItem toDo={myToDo1} /> */}
       {/* <ToDoItem toDo={myToDo2} /> */}
+      {/* toDos is the source array, map is creating a new array by calling the 
+      given function in each item in the source array, it is then passed to the ToDo(interface) item component
+      ToDoItem component has props(toDo=toDoItem,onDeleteToDo) */}
+      {/* toDoItem=name of each object in the toDos array, ToDo is an interface that is the typeof the function argument*/}
       {toDos.map((toDoItem: ToDo) => (
-        <ToDoItem handleChange toDo={toDoItem} />
+        <ToDoItem
+          onDeleteToDo={function () {
+          const filterToDos = toDos.filter(x=>x !== toDoItem)
+          setToDos(filterToDos)
+          }}
+          toDo={toDoItem}
+        />
       ))}
     </div>
   );
