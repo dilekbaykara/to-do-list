@@ -239,6 +239,9 @@ function App(): JSX.Element {
           setToDos(filterToDos)
           }}
           toDo={toDoItem}
+          // onCheckBoxClick={function () {
+          //   const filterDoneTasks = toDos.filter(x=> !== handleCheck)
+          // }}
         />
       ))}
     </div>

@@ -16,6 +16,10 @@
   margin-right: 2rem;
 }
 
+.important{
+  background-color: #ff3535;
+}
+
 .checkbox-title-container {
   margin-top: 1rem;
   margin-bottom: 1rem;
