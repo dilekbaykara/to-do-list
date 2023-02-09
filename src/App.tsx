@@ -85,8 +85,10 @@ function ToDoItem(props: { toDo: ToDo; onDeleteToDo: any }) {
   return (
     <div className="to-do-item" id="to-do-item">
       <div className="checkbox-title-container">
+        <div className="check-title-div">
         {Checkbox()}
         <h2 className="to-do-title">{props.toDo.title}</h2>
+        </div>
         <div id="delete-div">
           <button id="delete" onClick={props.onDeleteToDo}>
             Delete
