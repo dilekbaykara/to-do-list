@@ -21,16 +21,19 @@
 }
 
 .checkbox-title-container {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  align-items: center;
+    margin-top: 1rem;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(1, 4rem);
+    margin-left: -0.5rem;
+    align-items: center;
+    margin-right: 0.5rem;
 }
 
 #checkbox {
-  display: inline-block;
+  justify-self: flex-start;
+  display: flex;
   height: 2rem;
   width: 2rem;
   margin: 2rem;
@@ -38,6 +41,8 @@
 
 /* ADJUST THIS LATER*/
 #delete-div{
+  justify-self: end;
+  grid-column: 5;
   display: flex;
   gap: 2rem;
 }
