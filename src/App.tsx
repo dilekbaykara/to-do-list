@@ -5,6 +5,7 @@ import { render } from "@testing-library/react";
 import React from "react";
 import { toEditorSettings } from "typescript";
 import ReactDOM from "react-dom";
+import { getPriority } from "os";
 // Time of day Greeting for User at top of page
 
 function Greeting() {
@@ -81,7 +82,7 @@ function Checkbox(): JSX.Element {
 // return {ToDoItem}
 // }
 
-function ToDoItem(props: { toDo: ToDo; onDeleteToDo: any }) {
+function ToDoItem(props: { toDo: ToDo; onDeleteToDo: any;}) {
   return (
     <div className="to-do-item" id="to-do-item">
       <div className="checkbox-title-container">
@@ -90,6 +91,10 @@ function ToDoItem(props: { toDo: ToDo; onDeleteToDo: any }) {
         <h2 className="to-do-title">{props.toDo.title}</h2>
         </div>
         <div id="delete-div">
+        <select name="Priority" className="select-field">
+              <option className="important" value="important">Important</option>
+              <option selected>Normal</option>
+              </select>
           <button id="delete" onClick={props.onDeleteToDo}>
             Delete
           </button>
@@ -128,7 +133,7 @@ const initialTodos = initialTodosString
 function App(): JSX.Element {
   const [toDos, setToDos] = useState<ToDo[]>(initialTodos);
   const [addingToDo, setAddingToDo] = useState(false);
-  
+
 
   useEffect(
     function () {
@@ -154,6 +159,7 @@ function App(): JSX.Element {
         description: data.Description as string,
         checked: false,
       },
+      
     ]);
     setAddingToDo(false);
   }
@@ -180,8 +186,10 @@ function App(): JSX.Element {
           </p>
           <p>
             <select name="Priority" className="input-field">
-              <option>Important</option>
+              <option className="important" value="important">Important</option>
               <option selected>Normal</option>
+        
+              {/* <option>Urgent</option> */}
             </select>
           </p>
           <p>
@@ -197,6 +205,7 @@ function App(): JSX.Element {
       </div>
     );
   }
+
   return (
     <div className="App">
       <div className="greeting-container">
