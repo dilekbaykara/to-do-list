@@ -5,7 +5,8 @@ import { render } from "@testing-library/react";
 import React from "react";
 import { toEditorSettings } from "typescript";
 import ReactDOM from "react-dom";
-import { getPriority } from "os";
+import { getPriority, setPriority } from "os";
+import { parse } from "path";
 // Time of day Greeting for User at top of page
 
 function Greeting() {
@@ -26,7 +27,7 @@ function Greeting() {
 
 interface ToDo {
   title: string;
-  priority: "normal" | "important";
+  priority: 1 | 2;
   description: string;
   checked: boolean;
   duedate?: Date;
@@ -36,7 +37,7 @@ const myToDo1: ToDo = {
   checked: true,
   description: "Take out the trash",
   duedate: new Date(2023, 1, 30),
-  priority: "important",
+  priority: 2,
   title: "Chores",
 };
 
@@ -44,7 +45,7 @@ const myToDo2: ToDo = {
   checked: false,
   description: "Throw away paper",
   duedate: new Date(2023, 1, 31),
-  priority: "normal",
+  priority: 1,
   title: "To Do",
 };
 
@@ -82,19 +83,39 @@ function Checkbox(): JSX.Element {
 // return {ToDoItem}
 // }
 
-function ToDoItem(props: { toDo: ToDo; onDeleteToDo: any;}) {
+function ToDoItem(props: {
+  toDo: ToDo;
+  onDeleteToDo: any;
+  prioritySelect: any;
+}) {
+  const handleOptionsChange = (event: any) => {
+    const selectBox = event.target
+    const newValue = selectBox.value
+    const newPriorityNumber = parseInt(newValue)
+    props.prioritySelect(newPriorityNumber)
+    // props.prioritySelect(parseInt(event.target.value));
+  };
   return (
-    <div className="to-do-item" id="to-do-item">
+    <div className="to-do-item" data-priority={props.toDo.priority} id="to-do-item">
       <div className="checkbox-title-container">
         <div className="check-title-div">
-        {Checkbox()}
-        <h2 className="to-do-title">{props.toDo.title}</h2>
+          {Checkbox()}
+          <h2 className="to-do-title">{props.toDo.title}</h2>
         </div>
         <div id="delete-div">
-        <select name="Priority" className="select-field">
-              <option className="important" value="important">Important</option>
-              <option selected>Normal</option>
-              </select>
+          <select
+            name="Priority"
+            className="select-field"
+            value={props.toDo.priority}
+            onChange={handleOptionsChange}
+          >
+            <option value="1">
+              Important
+            </option>
+            <option value="2">
+              Normal
+            </option>
+          </select>
           <button id="delete" onClick={props.onDeleteToDo}>
             Delete
           </button>
@@ -134,7 +155,6 @@ function App(): JSX.Element {
   const [toDos, setToDos] = useState<ToDo[]>(initialTodos);
   const [addingToDo, setAddingToDo] = useState(false);
 
-
   useEffect(
     function () {
       localStorage.setItem("toDoList", JSON.stringify(toDos));
@@ -155,13 +175,11 @@ function App(): JSX.Element {
       ...toDos,
       {
         title: data.Title as string,
-        priority: data.Priority as "normal" | "important",
+        priority: parseInt(data.Priority as string) as 2 | 1,
         description: data.Description as string,
         checked: false,
       },
-      
     ]);
-    setAddingToDo(false);
   }
 
   if (addingToDo) {
@@ -186,9 +204,13 @@ function App(): JSX.Element {
           </p>
           <p>
             <select name="Priority" className="input-field">
-              <option className="important" value="important">Important</option>
-              <option selected>Normal</option>
-        
+              <option className="important" value="1">
+                Important
+              </option>
+              <option selected value="2">
+                Normal
+              </option>
+
               {/* <option>Urgent</option> */}
             </select>
           </p>
@@ -246,8 +268,17 @@ function App(): JSX.Element {
       {toDos.map((toDoItem: ToDo) => (
         <ToDoItem
           onDeleteToDo={function () {
-          const filterToDos = toDos.filter(x=>x !== toDoItem)
-          setToDos(filterToDos)
+            const filterToDos = toDos.filter((x) => x !== toDoItem);
+            setToDos(filterToDos);
+          }}
+          //Priority function to call to return a different colored div
+
+          prioritySelect={function (updatedPriority: any) {
+            const updatedToDos = toDos.map((x) =>
+              x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
+            );
+            console.log(updatedToDos);
+            setToDos(updatedToDos);
           }}
           toDo={toDoItem}
           // onCheckBoxClick={function () {

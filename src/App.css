@@ -16,6 +16,10 @@
   margin-right: 2rem;
 }
 
+.to-do-item[data-priority="1"]{
+  background-color: #ffff;
+}
+
 .important{
   background-color: #ff3535;
 }
