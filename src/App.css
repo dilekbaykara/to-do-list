@@ -17,11 +17,7 @@
 }
 
 .to-do-item[data-priority="1"]{
-  background-color: #ffff;
-}
-
-.important{
-  background-color: #ff3535;
+  background-color: #fdb06b;
 }
 
 .checkbox-title-container {
