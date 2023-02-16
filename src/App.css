@@ -45,6 +45,8 @@
 #delete-div{
   justify-self: end;
   grid-column: 5;
+  grid-row: 1;
+  overflow: hidden;
   display: flex;
   gap: 2rem;
 }
@@ -75,19 +77,20 @@
   color:#131b2d;
 }
 
-.to-do-date {
-}
+/* .to-do-date {
+} */
 
 .to-do-title {
   grid-column: 2/3;
   grid-row: 1;
+  overflow: hidden;
   display: flex;
   flex-shrink: 0;
   flex-wrap: nowrap;
   font-family: elza, sans-serif;
   font-weight: 500;
   font-style: normal;
-  width: 20rem;
+  width: 100%;
   color: #131b2d;
   font-size: 36px;
 }

@@ -52,29 +52,6 @@ const myToDo2: ToDo = {
 // PROBLEM AREA FOR SHOWING FUNCTION FOR DONE BOARD
 
 //CHECKBOX PROBLEM AREA
-function Checkbox(): JSX.Element {
-  const [checked, setChecked] = useState(false);
-  // function showDone(){
-  //   const toDoList = initialTodos.filter(Checkbox(), checked === true)
-  //   return toDoList
-  // }
-  // const doneToDos = toDoList.map()
-  const handleCheck = () => {
-    setChecked(!checked);
-    if (checked === false) return {};
-    else return function showActive() {};
-  };
-  return (
-    <div>
-      <input
-        type="checkbox"
-        id="checkbox"
-        checked={checked}
-        onClick={handleCheck}
-      />
-    </div>
-  );
-}
 
 // function deleteToDo(isDeleted: true)
 // { if (isDeleted === true){
@@ -83,23 +60,61 @@ function Checkbox(): JSX.Element {
 // return {ToDoItem}
 // }
 
+
+function showDone(){
+  console.log("Done task")
+};
+
 function ToDoItem(props: {
   toDo: ToDo;
   onDeleteToDo: any;
   prioritySelect: any;
+  handleCheck: any;
 }) {
   const handleOptionsChange = (event: any) => {
-    const selectBox = event.target
-    const newValue = selectBox.value
-    const newPriorityNumber = parseInt(newValue)
-    props.prioritySelect(newPriorityNumber)
-    // props.prioritySelect(parseInt(event.target.value));
+    const selectBox = event.target;
+    const newValue = selectBox.value;
+    const newPriorityNumber = parseInt(newValue);
+    props.prioritySelect(newPriorityNumber);
   };
+  // props.prioritySelect(parseInt(event.target.value));
+  const [checked, setChecked] = useState(false);
+  const handleCheck = (event: any) => {
+    const checkBox = event.target;
+    const newCheckValue = checkBox.value;
+    props.handleCheck(newCheckValue)
+
+    setChecked(!checked);
+
+    if (checked === false) return {};
+    else return function showDone() {
+    
+    };
+  };
+
+ // function showDone(){
+  //   const toDoList = initialTodos.filter(Checkbox(), checked === true)
+  //   return toDoList
+  // }
+  // const doneToDos = toDoList.map()
   return (
-    <div className="to-do-item" data-priority={props.toDo.priority} id="to-do-item">
+    <div
+      className="to-do-item"
+      data-priority={props.toDo.priority}
+      id="to-do-item"
+    >
       <div className="checkbox-title-container">
         <div className="check-title-div">
-          {Checkbox()}
+          <div>
+            <input
+              type="checkbox"
+              id="checkbox"
+              
+              onClick={handleCheck}
+              data-checked={props.toDo.checked}
+            />
+          </div>
+
           <h2 className="to-do-title">{props.toDo.title}</h2>
         </div>
         <div id="delete-div">
@@ -109,12 +124,8 @@ function ToDoItem(props: {
             value={props.toDo.priority}
             onChange={handleOptionsChange}
           >
-            <option value="1">
-              Important
-            </option>
-            <option value="2">
-              Normal
-            </option>
+            <option value="1">Important</option>
+            <option value="2">Normal</option>
           </select>
           <button id="delete" onClick={props.onDeleteToDo}>
             Delete
@@ -177,7 +188,7 @@ function App(): JSX.Element {
         title: data.Title as string,
         priority: parseInt(data.Priority as string) as 2 | 1,
         description: data.Description as string,
-        checked: false,
+        checked: false || true,
       },
     ]);
   }
@@ -255,7 +266,7 @@ function App(): JSX.Element {
         </div>
         <div className="status-container">
           <button className="activeButton">Active</button>
-          <button className="doneButton">Done</button>
+          <button className="doneButton" onClick={showDone}>Done</button>
         </div>
       </div>
       <hr />
@@ -279,6 +290,11 @@ function App(): JSX.Element {
             );
             console.log(updatedToDos);
             setToDos(updatedToDos);
+          }}
+          handleCheck={function () {
+            const doneToDos = toDos.filter((x) => x !== toDoItem);
+
+            setToDos(doneToDos);
           }}
           toDo={toDoItem}
           // onCheckBoxClick={function () {
