@@ -3,10 +3,11 @@ import { useState, FormEvent, useEffect } from "react"; //
 import { stringify } from "querystring";
 import { render } from "@testing-library/react";
 import React from "react";
-import { toEditorSettings } from "typescript";
+import { JsxEmit, toEditorSettings } from "typescript";
 import ReactDOM from "react-dom";
 import { getPriority, setPriority } from "os";
 import { parse } from "path";
+import { createRoot } from "react-dom/client";
 // Time of day Greeting for User at top of page
 
 function Greeting() {
@@ -61,9 +62,7 @@ const myToDo2: ToDo = {
 // }
 
 
-function showDone(){
-  console.log("Done task")
-};
+
 
 function ToDoItem(props: {
   toDo: ToDo;
@@ -86,8 +85,8 @@ function ToDoItem(props: {
 
     setChecked(!checked);
 
-    if (checked === false) return {};
-    else return function showDone() {
+    if (checked === true) return console.log("done");
+    else return {
     
     };
   };
@@ -155,6 +154,9 @@ function ToDoItem(props: {
     </div>
   );
 }**/
+const ShowDone = () => {
+ console.log('hello')
+}
 
 const initialTodosString = localStorage.getItem("toDoList");
 
@@ -266,7 +268,7 @@ function App(): JSX.Element {
         </div>
         <div className="status-container">
           <button className="activeButton">Active</button>
-          <button className="doneButton" onClick={showDone}>Done</button>
+          <button className="doneButton" onClick={ShowDone}>Done</button>
         </div>
       </div>
       <hr />
