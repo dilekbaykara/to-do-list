@@ -154,9 +154,6 @@ function ToDoItem(props: {
     </div>
   );
 }**/
-const ShowDone = () => {
- console.log('hello')
-}
 
 const initialTodosString = localStorage.getItem("toDoList");
 
@@ -167,14 +164,26 @@ const initialTodos = initialTodosString
 function App(): JSX.Element {
   const [toDos, setToDos] = useState<ToDo[]>(initialTodos);
   const [addingToDo, setAddingToDo] = useState(false);
+  const [showTasks, setShowTasks] = useState(false)
 
+ 
   useEffect(
     function () {
       localStorage.setItem("toDoList", JSON.stringify(toDos));
     },
     [toDos]
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const showDone = () => { setShowTasks(true)
+  
+ };
+  
+ const Tasks = () => (
+  <div id="results" className="task-results">
+   Done Tasks Go Here!
+  </div>
 
+);
   function newTask() {
     setAddingToDo(true);
   }
@@ -268,10 +277,13 @@ function App(): JSX.Element {
         </div>
         <div className="status-container">
           <button className="activeButton">Active</button>
-          <button className="doneButton" onClick={ShowDone}>Done</button>
+          <button className="doneButton" onClick={showDone}>Done
+          </button>
         </div>
+      
       </div>
       <hr />
+      { showTasks ? <Tasks /> : null }
       {/* <ToDoItem toDo={myToDo1} /> */}
       {/* <ToDoItem toDo={myToDo2} /> */}
       {/* toDos is the source array, map is creating a new array by calling the 
