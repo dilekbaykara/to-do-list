@@ -63,7 +63,6 @@ const myToDo2: ToDo = {
 
 
 
-
 function ToDoItem(props: {
   toDo: ToDo;
   onDeleteToDo: any;
@@ -77,25 +76,27 @@ function ToDoItem(props: {
     props.prioritySelect(newPriorityNumber);
   };
   // props.prioritySelect(parseInt(event.target.value));
-  const [checked, setChecked] = useState(false);
-  const handleCheck = (event: any) => {
-    const checkBox = event.target;
-    const newCheckValue = checkBox.value;
-    props.handleCheck(newCheckValue)
+  // const [checked, setChecked] = useState(false);
 
-    setChecked(!checked);
+  // const handleCheck = (event: any) => {
+  //   // const [showDoneTasks, setShowDoneTasks] = useState(false);
+  //   const checkBox = event.target;
+  //   const newCheckValue = checkBox.value;
+  //   props.handleCheck(newCheckValue);
+  //   setChecked(!checked);
 
-    if (checked === true) return console.log("done");
-    else return {
+  //   if(checked === false) return (
+  //   <DoneTasks 
     
-    };
-  };
+      
+    
+  //   />)
+    
+  //   // console.log('Oh yes');
+  //   else console.log('Oh no');
+  // };
 
- // function showDone(){
-  //   const toDoList = initialTodos.filter(Checkbox(), checked === true)
-  //   return toDoList
-  // }
-  // const doneToDos = toDoList.map()
+
   return (
     <div
       className="to-do-item"
@@ -108,8 +109,8 @@ function ToDoItem(props: {
             <input
               type="checkbox"
               id="checkbox"
-              
-              onClick={handleCheck}
+
+              onClick={props.handleCheck}
               data-checked={props.toDo.checked}
             />
           </div>
@@ -164,7 +165,7 @@ const initialTodos = initialTodosString
 function App(): JSX.Element {
   const [toDos, setToDos] = useState<ToDo[]>(initialTodos);
   const [addingToDo, setAddingToDo] = useState(false);
-  const [showTasks, setShowTasks] = useState(false)
+  const [showingDoneTasks, setShowDoneTasks] = useState(false);
 
  
   useEffect(
@@ -174,16 +175,61 @@ function App(): JSX.Element {
     [toDos]
   );
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const showDone = () => { setShowTasks(true)
-  
- };
-  
- const Tasks = () => (
-  <div id="results" className="task-results">
-   Done Tasks Go Here!
-  </div>
 
-);
+function showDone()
+{setShowDoneTasks(true)}
+
+
+const DoneTasks = () => (
+  
+  <div className="App">
+      <div className="greeting-container">
+        <div className="greeting">
+          <Greeting />
+        </div>
+        <button className="task-button" onClick={newTask}>
+          New Task
+        </button>
+        <div className="date-container">
+          Today is {new Date().toLocaleString("en-US", { weekday: "long" })}
+          <br />
+          <div className="current-date">
+            {new Date().toLocaleString("en-US", {
+              month: "long",
+              day: "2-digit",
+            })}
+            , {new Date().getFullYear()}
+          </div>
+        </div>
+      </div>
+      <div className="task-container">
+        <div id="completed-task-counter">
+          {toDos.length} {toDos.length === 1 ? "Completed Task" : "Completed Tasks"}
+        </div>
+        <div className="status-container">
+          <button className="activeButton">Active</button>
+          <button className="doneButton" onClick={showDone}>Done
+          </button>
+        </div>
+      
+      </div>
+      <hr />
+      </div>
+ );
+
+
+if(showingDoneTasks){
+  return <DoneTasks/>
+};
+  
+//  const DoneTasks = () => (
+//   <div id="results" className="task-results">
+//    Done Tasks Go Here!
+//   </div>
+// );
+
+  
+
   function newTask() {
     setAddingToDo(true);
   }
@@ -283,7 +329,7 @@ function App(): JSX.Element {
       
       </div>
       <hr />
-      { showTasks ? <Tasks /> : null }
+      { showingDoneTasks ? <DoneTasks /> : null }
       {/* <ToDoItem toDo={myToDo1} /> */}
       {/* <ToDoItem toDo={myToDo2} /> */}
       {/* toDos is the source array, map is creating a new array by calling the 
@@ -302,15 +348,22 @@ function App(): JSX.Element {
             const updatedToDos = toDos.map((x) =>
               x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
             );
-            console.log(updatedToDos);
+           
             setToDos(updatedToDos);
           }}
-          handleCheck={function () {
-            const doneToDos = toDos.filter((x) => x !== toDoItem);
-
-            setToDos(doneToDos);
-          }}
           toDo={toDoItem}
+
+          //DONE TO DO FUNCTION, MAJOR BUGS.... 
+          handleCheck={function (updatedCheck: any) {
+            
+            const doneToDos = toDos.map((x) => x === toDoItem ? ({ ...x, checked: updatedCheck} as any) : x);
+            // setShowDoneTasks(true);
+            <DoneTasks {...doneToDos.map} />
+      
+          }
+        }
+          
+          
           // onCheckBoxClick={function () {
           //   const filterDoneTasks = toDos.filter(x=> !== handleCheck)
           // }}

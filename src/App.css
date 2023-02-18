@@ -197,4 +197,10 @@ select {
     align-content: center;
   }
 
- 
+ #completed-task-counter{
+
+
+  grid-column: 1/3;
+  justify-self: start;
+  width: 21rem;
+ }
