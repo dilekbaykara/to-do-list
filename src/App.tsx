@@ -75,20 +75,59 @@ function ToDoItem(props: {
     const newPriorityNumber = parseInt(newValue);
     props.prioritySelect(newPriorityNumber);
   };
+
+  // const checkBoxCheck = (event: any) => {
+  //   const checkBox = event.target;
+  //   const checkBoxValue = checkBox.value;
+  //   const checked = checkBoxValue as boolean;
+  //   props.handleCheck(checked);
+  // }
+const [agreement, setAgreement] = useState(false);
+const handleCheck= (event: any) => {
+  if (event.target.checked){
+    console.log('checked');}
+    else {console.log('checkbox is not checked');
+  }
+  setAgreement(current => !current);
+}
+//   const target = event.target;
+//   const value = target.name === 'checkBox' ? target.checked : target.value;
+//   const name = target.name;
+
+//   target.setState({
+//     [name]: value
+//   });
+// }
+
+
+
   // props.prioritySelect(parseInt(event.target.value));
-  // const [checked, setChecked] = useState(false);
+ 
 
   // const handleCheck = (event: any) => {
-  //   // const [showDoneTasks, setShowDoneTasks] = useState(false);
-  //   const checkBox = event.target;
-  //   const newCheckValue = checkBox.value;
-  //   props.handleCheck(newCheckValue);
-  //   setChecked(!checked);
-
-  //   if(checked === false) return (
-  //   <DoneTasks 
+  // //   // const [showDoneTasks, setShowDoneTasks] = useState(false);
+  // const checkBox = event.target;
+  // const newCheckBoxValue = checkBox.value;
+  // props.handleCheck(newCheckBoxValue);
+  // };
+  // //   if(checked === false) return (
+  // //   <DoneTasks 
     
-      
+  // const [checked, setChecked] = useState(false);
+ 
+
+
+//   // const [showDoneTasks, setShowDoneTasks] = useState(false);
+// setChecked((toDos) => {
+//   return initialTodos.map((toDos: { checked: boolean; }) => {
+//     if (toDos.checked === false) {
+//       toDos.checked = checked
+//     }
+//     return  console.log(toDos)
+//   })
+// })
+
+
     
   //   />)
     
@@ -107,11 +146,11 @@ function ToDoItem(props: {
         <div className="check-title-div">
           <div>
             <input
+              checked={agreement}
               type="checkbox"
               id="checkbox"
-
-              onClick={props.handleCheck}
-              data-checked={props.toDo.checked}
+              onChange={handleCheck}
+              
             />
           </div>
 
@@ -167,7 +206,7 @@ function App(): JSX.Element {
   const [addingToDo, setAddingToDo] = useState(false);
   const [showingDoneTasks, setShowDoneTasks] = useState(false);
 
- 
+
   useEffect(
     function () {
       localStorage.setItem("toDoList", JSON.stringify(toDos));
@@ -359,7 +398,7 @@ if(showingDoneTasks){
             const doneToDos = toDos.map((x) => x === toDoItem ? ({ ...x, checked: updatedCheck} as any) : x);
             // setShowDoneTasks(true);
             <DoneTasks {...doneToDos.map} />
-      
+            console.log(doneToDos);
           }
         }
           
