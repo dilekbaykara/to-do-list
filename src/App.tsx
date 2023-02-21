@@ -82,13 +82,9 @@ function ToDoItem(props: {
   //   const checked = checkBoxValue as boolean;
   //   props.handleCheck(checked);
   // }
-const [agreement, setAgreement] = useState(false);
-const handleCheck= (event: any) => {
-  if (event.target.checked){
-    console.log('checked');}
-    else {console.log('checkbox is not checked');
-  }
-  setAgreement(current => !current);
+const [agreement, setAgreement] = useState(true);
+const handleCheck = () => {
+  setAgreement( !agreement );
 }
 //   const target = event.target;
 //   const value = target.name === 'checkBox' ? target.checked : target.value;
@@ -146,11 +142,10 @@ const handleCheck= (event: any) => {
         <div className="check-title-div">
           <div>
             <input
-              checked={agreement}
               type="checkbox"
               id="checkbox"
-              onChange={handleCheck}
-              
+              onChange={props.handleCheck}
+              onClick={handleCheck}
             />
           </div>
 
@@ -394,11 +389,11 @@ if(showingDoneTasks){
 
           //DONE TO DO FUNCTION, MAJOR BUGS.... 
           handleCheck={function (updatedCheck: any) {
-            
             const doneToDos = toDos.map((x) => x === toDoItem ? ({ ...x, checked: updatedCheck} as any) : x);
+            console.log(doneToDos);
             // setShowDoneTasks(true);
             <DoneTasks {...doneToDos.map} />
-            console.log(doneToDos);
+            
           }
         }
           
