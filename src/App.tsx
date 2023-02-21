@@ -76,16 +76,18 @@ function ToDoItem(props: {
     props.prioritySelect(newPriorityNumber);
   };
 
-  // const checkBoxCheck = (event: any) => {
-  //   const checkBox = event.target;
-  //   const checkBoxValue = checkBox.value;
-  //   const checked = checkBoxValue as boolean;
-  //   props.handleCheck(checked);
-  // }
-const [agreement, setAgreement] = useState(true);
-const handleCheck = () => {
-  setAgreement( !agreement );
+const checkBoxCheck = (event: any) => {
+const checkBox = event.currentTarget.checked
+console.log(checkBox)
+// const checkBox = event.target;
+// const checkBoxValue = checkBox.value;
+// const checked = checkBoxValue as boolean;
+// props.handleCheck(checked);
 }
+// const [agreement, setAgreement] = useState(true);
+// const handleCheck = () => {
+//   setAgreement( !agreement );
+// }
 //   const target = event.target;
 //   const value = target.name === 'checkBox' ? target.checked : target.value;
 //   const name = target.name;
@@ -145,7 +147,7 @@ const handleCheck = () => {
               type="checkbox"
               id="checkbox"
               onChange={props.handleCheck}
-              onClick={handleCheck}
+              onClick={checkBoxCheck}
             />
           </div>
 
@@ -388,8 +390,8 @@ if(showingDoneTasks){
           toDo={toDoItem}
 
           //DONE TO DO FUNCTION, MAJOR BUGS.... 
-          handleCheck={function (updatedCheck: any) {
-            const doneToDos = toDos.map((x) => x === toDoItem ? ({ ...x, checked: updatedCheck} as any) : x);
+          handleCheck={function (updatedCheck: boolean) {
+            const doneToDos = toDos.map((x) => x === toDoItem ? ({ ...x, checkBox: updatedCheck} as any) : x);
             console.log(doneToDos);
             // setShowDoneTasks(true);
             <DoneTasks {...doneToDos.map} />
