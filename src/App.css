@@ -49,6 +49,7 @@
   overflow: hidden;
   display: flex;
   gap: 2rem;
+  background-color: aliceblue;
 }
 
 #delete{
@@ -193,6 +194,7 @@ select {
     font-weight: 400;
     font-style: normal;
     color: #ffff;
+    align-self: center;
     justify-content: center;
     align-content: center;
   }
