@@ -48,7 +48,7 @@
   grid-row: 1;
   overflow: hidden;
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
   background-color: aliceblue;
 }
 
@@ -82,12 +82,16 @@
 } */
 
 .to-do-title {
+  font-family: elza, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  width: max-content;
   grid-column: 2/3;
   grid-row: 1;
   overflow: hidden;
   display: flex;
   flex-shrink: 0;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   font-family: elza, sans-serif;
   font-weight: 500;
   font-style: normal;
@@ -123,12 +127,6 @@ form {
   align-items: center;
 }
 
-.to-do-title{
-  font-family: elza, sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  width: max-content;
-}
 
 .input-field {
   display: flex;
@@ -185,7 +183,7 @@ select {
 .select-field {
     /* display: flex; */
     height: 2rem;
-    width: 10rem;
+    width: 7rem;
     border-radius: 10px;
     background-color: #131b2d;
     border: solid 1px #6889f7;
