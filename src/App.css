@@ -183,7 +183,7 @@ select {
 .select-field {
     /* display: flex; */
     height: 2rem;
-    width: 7rem;
+    width: 6rem;
     border-radius: 10px;
     background-color: #131b2d;
     border: solid 1px #6889f7;
