@@ -49,7 +49,7 @@
   overflow: hidden;
   display: flex;
   gap: 1rem;
-  background-color: aliceblue;
+  /* background-color: aliceblue; */
 }
 
 #delete{
