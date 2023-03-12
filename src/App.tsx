@@ -70,6 +70,8 @@ function ToDoItem(props: {
   onDeleteToDo: any;
   prioritySelect: any;
   onCheckBoxCheck: any;
+  duedate?: Date;
+
 }) {
   const handleOptionsChange = (event: any) => {
     const selectBox = event.target;
@@ -124,6 +126,11 @@ console.log(props.toDo)
             Delete
           </button>
         </div>
+
+         {/* <span className="to-do-date">
+        {props.toDo.duedate?.toLocaleDateString()}
+      </span>  */}
+
         <div className="description-box">
         <span className="description">{props.toDo.description}</span>
       </div>
@@ -132,25 +139,10 @@ console.log(props.toDo)
         <span className="description">{props.toDo.description}</span>
       </div> */}
       <br />
-      <span className="to-do-date">
-        {/* {props.toDo.duedate.toLocaleDateString()} */}
-      </span>
     </div>
   );
 }
 
-//Set Counter example below//
-/**function Example() {
-  // Declare a new state variable, which we'll call "count"
-  const [count, setCount] = useState<number>(0);
-
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
-    </div>
-  );
-}**/
 
 const initialTodosString = localStorage.getItem("toDoList");
 
@@ -235,7 +227,7 @@ if(showingDoneTasks){
   }
 
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    // event.preventDefault();
     const data = Object.fromEntries(
       new FormData(event.target as HTMLFormElement)
     );

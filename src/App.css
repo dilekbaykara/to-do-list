@@ -21,12 +21,12 @@
 }
 
 .checkbox-title-container {
+    margin: 1rem;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 50%);
-    margin-left: -0.5rem;
     align-items: center;
-    margin-right: 0.5rem;
+
 }
 
 #checkbox {
