@@ -124,10 +124,13 @@ console.log(props.toDo)
             Delete
           </button>
         </div>
-      </div>
-      <div className="description-box">
+        <div className="description-box">
         <span className="description">{props.toDo.description}</span>
       </div>
+      </div>
+      {/* <div className="description-box">
+        <span className="description">{props.toDo.description}</span>
+      </div> */}
       <br />
       <span className="to-do-date">
         {/* {props.toDo.duedate.toLocaleDateString()} */}
