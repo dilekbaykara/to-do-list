@@ -62,7 +62,6 @@ h1{
 
 hr{
  display: flex;
-
  margin-top: 1rem;
  margin-bottom: 1rem;
  width: 92%;
@@ -105,4 +104,8 @@ button{
 button:hover{
   background-color: #6889f7;
   color:#131b2d;
+}
+
+.activeButton{
+  margin-right: 0.2rem;
 }

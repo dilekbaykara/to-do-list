@@ -293,7 +293,9 @@ if(showingDoneTasks){
           </p>
         </form>
       </div>
+      
     );
+  
   }
 
   return (
