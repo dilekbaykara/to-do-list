@@ -13,9 +13,10 @@ body {
 
 .greeting-container{
   margin-top: 1rem;
+  margin-bottom: 0;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 4rem);
+  grid-template-rows: repeat(2, 35%);
   margin-left: 1.5rem;
   align-items: center;
   margin-right: 1.5rem;
@@ -57,7 +58,7 @@ h1{
   font-weight: 500;
   font-style: normal;
   color:#6889f7;
-  font-size: 50px;
+  font-size: 3rem;
 }
 
 hr{
@@ -71,7 +72,6 @@ hr{
 .task-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  margin-top: 2rem;
   font-size: 2rem;
   color:#6889f7;
 }
