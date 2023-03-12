@@ -237,7 +237,7 @@ if(showingDoneTasks){
         title: data.Title as string,
         priority: parseInt(data.Priority as string) as 2 | 1,
         description: data.Description as string,
-        checked: false || true,
+        checked: false,
       },
     ]);
   }
