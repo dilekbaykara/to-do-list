@@ -1,4 +1,4 @@
-import { useState, FormEvent, useEffect } from "react"; //
+import { useState, FormEvent, useEffect, useMemo } from "react"; //
 import { stringify } from "querystring";
 import { render } from "@testing-library/react";
 import React from "react";
@@ -9,7 +9,7 @@ import { parse } from "path";
 import { createRoot } from "react-dom/client";
 import {ErrorBoundary} from 'react-error-boundary'
 import './App.css';
-import {useMemo} from "react";
+
 // Time of day Greeting for User at top of page
 
 function Greeting() {
@@ -70,7 +70,7 @@ function ToDoItem(props: {
   onDeleteToDo: any;
   prioritySelect: any;
   onCheckBoxCheck: any;
-  duedate?: Date;
+  duedate?: number;
 
 }) {
   const handleOptionsChange = (event: any) => {
@@ -154,7 +154,12 @@ function App(): JSX.Element {
   const [toDos, setToDos] = useState<ToDo[]>(initialTodos);
   const [addingToDo, setAddingToDo] = useState(false);
   const [showingDoneTasks, setShowDoneTasks] = useState(false);
-  // const [completedToDos, setCompletedToDos] = useState<ToDo[]>(initialTodos)
+  //added 3-12
+
+  
+
+  //const something function = useMemo([prop])
+
 
   useEffect(
     function () {
@@ -213,7 +218,9 @@ const DoneTasks = () => (
            
       </div>
       <hr />
+   
       </div>
+      
  );
 
 
@@ -341,13 +348,17 @@ if(showingDoneTasks){
           onCheckBoxCheck={function(checked: true | false) {
 
             const updatedToDos = toDos.map((x) =>
-            x === toDoItem ? ({ ...x, checked } as any) : x
+            x === toDoItem ? ({ ...x, checked } as any) : x,
           );
-         
+          // if (checked === true) return
+          // <DoneTasks/>
+          // showDone()
           // console.log(updatedToDos);
           setToDos(updatedToDos);
 
           }}
+
+      
           //Priority function to call to return a different colored div
 
           prioritySelect={function (updatedPriority: any) {
@@ -359,25 +370,6 @@ if(showingDoneTasks){
           }}
           toDo={toDoItem}
 
-          //DONE TO DO FUNCTION, MAJOR BUGS.... 
-        //   checkBoxCheck={function (updatedCheck: any) {
-
-
-        //     // const doneToDos = toDos.map((x) => x === toDoItem ? ({ ...x, updatedCheck} as any) : x);
-        
-        //     // console.log(doneToDos);
-
-
-        //     // setShowDoneTasks(true);
-        //     // <DoneTasks {...doneToDos.map} />
-            
-        //   }
-        // }
-          
-          
-          // onCheckBoxClick={function () {
-          //   const filterDoneTasks = toDos.filter(x=> !== handleCheck)
-          // }}
         />
       ))}
     </div>
