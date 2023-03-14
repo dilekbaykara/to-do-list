@@ -211,6 +211,9 @@ const DoneTasks = () => (
  
       </div>
       <hr />
+      {toDos.map((item) => (
+        <ToDoItem toDo={myToDo1} onDeleteToDo={undefined} prioritySelect={undefined} onCheckBoxCheck={undefined} />
+      ))}
       <div></div>
       <div></div>
      
