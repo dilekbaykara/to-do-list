@@ -52,19 +52,6 @@ const myToDo2: ToDo = {
   title: "To Do",
 };
 
-// PROBLEM AREA FOR SHOWING FUNCTION FOR DONE BOARD
-
-//CHECKBOX PROBLEM AREA
-
-// function deleteToDo(isDeleted: true)
-// { if (isDeleted === true){
-//   return null;
-// }
-// return {ToDoItem}
-// }
-
-
-
 function ToDoItem(props: {
   toDo: ToDo;
   onDeleteToDo: any;
@@ -92,7 +79,7 @@ if (!props.toDo){
   return <p>Missing To Do</p>
 }
 
-console.log(props.toDo)
+// console.log(props.toDo)
 
   return (
     <div
@@ -154,12 +141,23 @@ function App(): JSX.Element {
   const [toDos, setToDos] = useState<ToDo[]>(initialTodos);
   const [addingToDo, setAddingToDo] = useState(false);
   const [showingDoneTasks, setShowDoneTasks] = useState(false);
+  const [filterTodosCompleted, setFilterTodosCompleted] = useState(null)
+
+  const visibleTodos = useMemo(
+    () => toDos.filter(toDo => {
+     if (filterTodosCompleted === null) {
+      return true // if null show all
+      }
+      return filterTodosCompleted === toDo.checked // show only if completed state matches filter
+    }),
+    [toDos, filterTodosCompleted] // dependencies, when to recalculate
+   )
+
+  // const []
   //added 3-12
 
-  
-
-  //const something function = useMemo([prop])
-
+  // function TodoList({toDos, }) {
+  //   const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
 
   useEffect(
     function () {
@@ -167,16 +165,11 @@ function App(): JSX.Element {
     },
     [toDos]
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 
-//  if (completedToDos)
-//  setCompletedToDos(
-//   function () {
-//     localStorage.setItem("toDoList", JSON.stringify(completedToDos));
-//   })
+  // function assignDoneToDo() {
 
-
+  // }
 
 
 
@@ -215,14 +208,17 @@ const DoneTasks = () => (
           <button className="doneButton" onClick={showDone}>Done
           </button>
         </div>
-           
+ 
       </div>
       <hr />
-   
-      </div>
-      
- );
+      <div></div>
+      <div></div>
+     
+</div>
 
+ 
+ );
+      
 
 if(showingDoneTasks){
   return <DoneTasks  />
@@ -350,11 +346,23 @@ if(showingDoneTasks){
             const updatedToDos = toDos.map((x) =>
             x === toDoItem ? ({ ...x, checked } as any) : x,
           );
-          // if (checked === true) return
-          // <DoneTasks/>
-          // showDone()
-          // console.log(updatedToDos);
+            
+            const doneToDos = toDos.filter((x) => x === toDoItem);
+            console.log(doneToDos)
+           
+
+              // if (checked === true)
+              // return toDos.filter((x) => x !== toDoItem);
+              // return toDos.map((toDoItem: ToDo) => (
+              //   <DoneTasks/>
+              // ))
+            
+          
+
+            // console.log(doneToDos)
+        
           setToDos(updatedToDos);
+
 
           }}
 
