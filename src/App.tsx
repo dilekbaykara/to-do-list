@@ -211,8 +211,8 @@ const DoneTasks = () => (
  
       </div>
       <hr />
-      {toDos.map((item) => (
-        <ToDoItem toDo={myToDo1} onDeleteToDo={undefined} prioritySelect={undefined} onCheckBoxCheck={undefined} />
+      {toDos.map((toDoItem: ToDo) => (
+        <ToDoItem toDo={toDoItem} onDeleteToDo={undefined} prioritySelect={1|2} onCheckBoxCheck={undefined} />
       ))}
       <div></div>
       <div></div>
@@ -226,7 +226,6 @@ const DoneTasks = () => (
 if(showingDoneTasks){
   return <DoneTasks  />
 };
-  
 
   function newTask() {
     setAddingToDo(true);
