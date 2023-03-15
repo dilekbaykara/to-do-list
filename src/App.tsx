@@ -7,7 +7,6 @@ import ReactDOM from "react-dom";
 import { getPriority, setPriority } from "os";
 import { parse } from "path";
 import { createRoot } from "react-dom/client";
-import {ErrorBoundary} from 'react-error-boundary'
 import './App.css';
 
 // Time of day Greeting for User at top of page
@@ -105,6 +104,7 @@ if (!props.toDo){
             className="select-field"
             value={props.toDo.priority}
             onChange={handleOptionsChange}
+            
           >
             <option value="1">Important</option>
             <option value="2">Normal</option>
@@ -150,8 +150,10 @@ function App(): JSX.Element {
       }
       return filterTodosCompleted === toDo.checked // show only if completed state matches filter
     }),
-    [toDos, filterTodosCompleted] // dependencies, when to recalculate
+    [filterTodosCompleted, toDos]
+     // dependencies, when to recalculate
    )
+
 
   // const []
   //added 3-12
@@ -211,12 +213,13 @@ const DoneTasks = () => (
  
       </div>
       <hr />
-      {toDos.map((toDoItem: ToDo) => (
-        <ToDoItem toDo={toDoItem} onDeleteToDo={undefined} prioritySelect={1|2} onCheckBoxCheck={undefined} />
+      {visibleTodos.map((toDoItem: ToDo) => (
+        <ToDoItem toDo={toDoItem} onDeleteToDo={undefined} prioritySelect={1|2} onCheckBoxCheck={setFilterTodosCompleted} />
       ))}
+      
       <div></div>
       <div></div>
-     
+    
 </div>
 
  
@@ -335,7 +338,7 @@ if(showingDoneTasks){
       given function in each item in the source array, it is then passed to the ToDo(interface) item component
       ToDoItem component has props(toDo=toDoItem,onDeleteToDo) */}
       {/* toDoItem=name of each object in the toDos array, ToDo is an interface that is the typeof the function argument*/}
-      {toDos.map((toDoItem: ToDo) => (
+      {visibleTodos.map((toDoItem: ToDo) => (
         <ToDoItem
           onDeleteToDo={function () {
             const updatedToDos = toDos.filter((x) => x !== toDoItem);
@@ -343,14 +346,15 @@ if(showingDoneTasks){
             ////
           }}
 
-          onCheckBoxCheck={function(checked: true | false) {
+          onCheckBoxCheck={setFilterTodosCompleted}
+          // onCheckBoxCheck={function(checked: true | false) {
 
-            const updatedToDos = toDos.map((x) =>
-            x === toDoItem ? ({ ...x, checked } as any) : x,
-          );
+          //   const updatedToDos = toDos.map((x) =>
+          //   x === toDoItem ? ({ ...x, checked } as any) : x,
+          // );
             
-            const doneToDos = toDos.filter((x) => x === toDoItem);
-            console.log(doneToDos)
+          //   const doneToDos = toDos.filter((x) => x === toDoItem);
+          //   console.log(doneToDos)
            
 
               // if (checked === true)
@@ -363,10 +367,12 @@ if(showingDoneTasks){
 
             // console.log(doneToDos)
         
-          setToDos(updatedToDos);
+          // setToDos(updatedToDos);
 
 
-          }}
+          
+
+
 
       
           //Priority function to call to return a different colored div
