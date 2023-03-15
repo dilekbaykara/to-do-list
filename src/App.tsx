@@ -140,6 +140,7 @@ function App(): JSX.Element {
   const [toDos, setToDos] = useState<ToDo[]>(initialTodos);
   const [addingToDo, setAddingToDo] = useState(false);
   const [showingDoneTasks, setShowDoneTasks] = useState(false);
+  const [showingActiveTasks, setShowActiveTasks] = useState(false);
   const [filterTodosCompleted, setFilterTodosCompleted] = useState<any | null>(null)
   //  const [filterState, setFilterState] = useState<FilterState>(0);
 
@@ -177,6 +178,70 @@ function App(): JSX.Element {
 
   // }
 
+function showActive(){
+  setShowActiveTasks(true)
+  setFilterTodosCompleted(false)
+}
+
+const ActiveTasks = () => (
+
+<div className="App">
+      <div className="greeting-container">
+        <div className="greeting">
+          <Greeting />
+        </div>
+        <button className="task-button" onClick={newTask}>
+          New Task
+        </button>
+        <div className="date-container">
+          Today is {new Date().toLocaleString("en-US", { weekday: "long" })}
+          <br />
+          <div className="current-date">
+            {new Date().toLocaleString("en-US", {
+              month: "long",
+              day: "2-digit",
+            })}
+            , {new Date().getFullYear()}
+          </div>
+        </div>
+      </div>
+      <div className="task-container">
+        <div id="completed-task-counter">
+          {toDos.length} {toDos.length === 1 ? "Active Task" : "Active Tasks"}
+        </div>
+        <div className="status-container">
+          <button className="activeButton"onClick={showActive}>Active</button>
+          <button className="doneButton" onClick={showDone}>Done
+          </button>
+        </div>
+ 
+      </div>
+      <hr />
+      
+      {visibleTodos.map((toDoItem) => (
+        <ToDoItem toDo={toDoItem} onDeleteToDo={undefined} prioritySelect={1|2} onCheckBoxCheck={function(checked: true | false) {
+
+          const updatedToDos = toDos.map((x) =>
+            x === toDoItem ? ({ ...x, checked } as any) : x
+          );
+          setToDos(updatedToDos);
+       }} />
+     
+      ))}
+      <div></div>
+      <div></div>
+    
+</div>
+
+
+
+
+);
+
+
+if(showingActiveTasks){
+  return <ActiveTasks  />
+};
 
 
 function showDone()
@@ -212,7 +277,7 @@ const DoneTasks = () => (
           {toDos.length} {toDos.length === 1 ? "Completed Task" : "Completed Tasks"}
         </div>
         <div className="status-container">
-          <button className="activeButton">Active</button>
+          <button className="activeButton" onClick={showActive}>Active</button>
           <button className="doneButton" onClick={showDone}>Done
           </button>
         </div>
@@ -338,7 +403,7 @@ if(showingDoneTasks){
           {toDos.length} {toDos.length === 1 ? "Task" : "Tasks"}
         </div>
         <div className="status-container">
-          <button className="activeButton" >Active</button>
+          <button className="activeButton"onClick={showActive}>Active</button>
           <button className="doneButton" onClick={showDone}>Done
           </button>
         </div>
