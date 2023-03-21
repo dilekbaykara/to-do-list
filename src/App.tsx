@@ -7,7 +7,7 @@ import ReactDOM from "react-dom";
 import { getPriority, setPriority } from "os";
 import { parse } from "path";
 import { createRoot } from "react-dom/client";
-import './App.css';
+import "./App.css";
 
 // Time of day Greeting for User at top of page
 
@@ -32,13 +32,13 @@ interface ToDo {
   priority: 1 | 2;
   description: string;
   checked: true | false;
-  duedate?: Date;
+  duedate?: number;
 }
 
 const myToDo1: ToDo = {
   checked: true,
   description: "Take out the trash",
-  duedate: new Date(2023, 1, 30),
+  duedate: new Date(2023, 1, 30).getTime(),
   priority: 2,
   title: "Chores",
 };
@@ -46,7 +46,7 @@ const myToDo1: ToDo = {
 const myToDo2: ToDo = {
   checked: false,
   description: "Throw away paper",
-  duedate: new Date(2023, 1, 31),
+  duedate: new Date(2023, 1, 31).getTime(),
   priority: 1,
   title: "To Do",
 };
@@ -56,8 +56,6 @@ function ToDoItem(props: {
   onDeleteToDo: any;
   prioritySelect: any;
   onCheckBoxCheck: any;
-  duedate?: number;
-
 }) {
   const handleOptionsChange = (event: any) => {
     const selectBox = event.target;
@@ -72,17 +70,23 @@ function ToDoItem(props: {
     props.onCheckBoxCheck(newCheckBoxValue);
   };
 
-if (!props.toDo){
-  return <p>Missing To Do</p>
-}
+  // {
+  //   // const newDate=
 
-// console.log(props.toDo)
+  // }
+
+  if (!props.toDo) {
+    return <p>Missing To Do</p>;
+  }
+
+  // console.log(props.toDo)
 
   return (
     <div
       className="to-do-item"
       data-priority={props.toDo.priority}
-      id="to-do-item">
+      id="to-do-item"
+    >
       <div className="checkbox-title-container">
         <div className="check-title-div">
           <div>
@@ -91,7 +95,6 @@ if (!props.toDo){
               id="checkbox"
               onChange={checkBoxCheck}
               checked={props.toDo.checked}
-          
             />
           </div>
 
@@ -103,7 +106,6 @@ if (!props.toDo){
             className="select-field"
             value={props.toDo.priority}
             onChange={handleOptionsChange}
-            
           >
             <option value="1">Important</option>
             <option value="2">Normal</option>
@@ -112,14 +114,14 @@ if (!props.toDo){
             Delete
           </button>
         </div>
-
-         {/* <span className="to-do-date">
-        {props.toDo.duedate?.toLocaleDateString()}
-      </span>  */}
-
+        <span className="to-do-date">
+          {props.toDo.duedate
+            ? new Date(props.toDo.duedate).toLocaleDateString()
+            : null}
+        </span>
         <div className="description-box">
-        <span className="description">{props.toDo.description}</span>
-      </div>
+          <span className="description">{props.toDo.description}</span>
+        </div>
       </div>
       {/* <div className="description-box">
         <span className="description">{props.toDo.description}</span>
@@ -128,7 +130,6 @@ if (!props.toDo){
     </div>
   );
 }
-
 
 const initialTodosString = localStorage.getItem("toDoList");
 
@@ -141,24 +142,27 @@ function App(): JSX.Element {
   const [addingToDo, setAddingToDo] = useState(false);
   const [showingDoneTasks, setShowDoneTasks] = useState(false);
   const [showingActiveTasks, setShowActiveTasks] = useState(false);
-  const [filterTodosCompleted, setFilterTodosCompleted] = useState<any | null>(null)
+  const [filterTodosCompleted, setFilterTodosCompleted] = useState<any | null>(
+    null
+  );
   //  const [filterState, setFilterState] = useState<FilterState>(0);
 
   const visibleTodos = useMemo(
-    () => toDos.filter(toDo => {
-     if (filterTodosCompleted === null) {
-      return true // if null show all
-      }
-      return filterTodosCompleted === toDo.checked // show only if completed state matches filter
-    }),
+    () =>
+      toDos.filter((toDo) => {
+        if (filterTodosCompleted === null) {
+          return true; // if null show all
+        }
+        return filterTodosCompleted === toDo.checked; // show only if completed state matches filter
+      }),
     [filterTodosCompleted, toDos]
-     // dependencies, when to recalculate
-   )
+    // dependencies, when to recalculate
+  );
 
-// function showCompletedTasks(){
-// // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-// setFilterTodosCompleted(null)
-//  }
+  // function showCompletedTasks(){
+  // // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  // setFilterTodosCompleted(null)
+  //  }
 
   // const []
   //added 3-12
@@ -173,19 +177,17 @@ function App(): JSX.Element {
     [toDos]
   );
 
-
   // function assignDoneToDo() {
 
   // }
 
-function showActive(){
-  setShowActiveTasks(true)
-  setFilterTodosCompleted(false)
-}
+  function showActive() {
+    setShowActiveTasks(true);
+    setFilterTodosCompleted(false);
+  }
 
-const ActiveTasks = () => (
-
-<div className="App">
+  const ActiveTasks = () => (
+    <div className="App">
       <div className="greeting-container">
         <div className="greeting">
           <Greeting />
@@ -210,49 +212,54 @@ const ActiveTasks = () => (
           {toDos.length} {toDos.length === 1 ? "Active Task" : "Active Tasks"}
         </div>
         <div className="status-container">
-          <button className="activeButton"onClick={showActive}>Active</button>
-          <button className="doneButton" onClick={showDone}>Done
+          <button className="activeButton" onClick={showActive}>
+            Active
+          </button>
+          <button className="doneButton" onClick={showDone}>
+            Done
           </button>
         </div>
- 
       </div>
       <hr />
-      
-      {visibleTodos.map((toDoItem) => (
-        <ToDoItem toDo={toDoItem} onDeleteToDo={undefined} prioritySelect={1|2} onCheckBoxCheck={function(checked: true | false) {
 
-          const updatedToDos = toDos.map((x) =>
-            x === toDoItem ? ({ ...x, checked } as any) : x
-          );
-          setToDos(updatedToDos);
-       }} />
-     
+      {visibleTodos.map((toDoItem) => (
+        <ToDoItem
+          toDo={toDoItem}
+          onDeleteToDo={function () {
+            const updatedToDos = toDos.filter((x) => x !== toDoItem);
+            setToDos(updatedToDos);
+          }}
+          prioritySelect={function (updatedPriority: any) {
+            const updatedToDos = toDos.map((x) =>
+              x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
+            );
+
+            setToDos(updatedToDos);
+          }}
+          onCheckBoxCheck={function (checked: true | false) {
+            const updatedToDos = toDos.map((x) =>
+              x === toDoItem ? ({ ...x, checked } as any) : x
+            );
+            setToDos(updatedToDos);
+          }}
+        />
       ))}
       <div></div>
       <div></div>
-    
-</div>
+    </div>
+  );
 
+  if (showingActiveTasks) {
+    return <ActiveTasks />;
+  }
 
+  function showDone() {
+    setShowDoneTasks(true);
+    setFilterTodosCompleted(true);
+  }
 
-
-);
-
-
-if(showingActiveTasks){
-  return <ActiveTasks  />
-};
-
-
-function showDone()
-{setShowDoneTasks(true)
-setFilterTodosCompleted(true)
-}
-
-
-const DoneTasks = () => (
-  
-  <div className="App">
+  const DoneTasks = () => (
+    <div className="App">
       <div className="greeting-container">
         <div className="greeting">
           <Greeting />
@@ -274,40 +281,51 @@ const DoneTasks = () => (
       </div>
       <div className="task-container">
         <div id="completed-task-counter">
-          {toDos.length} {toDos.length === 1 ? "Completed Task" : "Completed Tasks"}
+          {toDos.length}{" "}
+          {toDos.length === 1 ? "Completed Task" : "Completed Tasks"}
         </div>
         <div className="status-container">
-          <button className="activeButton" onClick={showActive}>Active</button>
-          <button className="doneButton" onClick={showDone}>Done
+          <button className="activeButton" onClick={showActive}>
+            Active
+          </button>
+          <button className="doneButton" onClick={showDone}>
+            Done
           </button>
         </div>
- 
       </div>
       <hr />
-      
-      {visibleTodos.map((toDoItem) => (
-        <ToDoItem toDo={toDoItem} onDeleteToDo={undefined} prioritySelect={1|2} onCheckBoxCheck={function(checked: true | false) {
 
-          const updatedToDos = toDos.map((x) =>
-            x === toDoItem ? ({ ...x, checked } as any) : x
-          );
-          setToDos(updatedToDos);
-       }} />
-     
+      {visibleTodos.map((toDoItem) => (
+        <ToDoItem
+          toDo={toDoItem}
+          onDeleteToDo={function () {
+            const updatedToDos = toDos.filter((x) => x !== toDoItem);
+            setToDos(updatedToDos);
+            ////
+          }}
+          prioritySelect={function (updatedPriority: any) {
+            const updatedToDos = toDos.map((x) =>
+              x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
+            );
+
+            setToDos(updatedToDos);
+          }}
+          onCheckBoxCheck={function (checked: true | false) {
+            const updatedToDos = toDos.map((x) =>
+              x === toDoItem ? ({ ...x, checked } as any) : x
+            );
+            setToDos(updatedToDos);
+          }}
+        />
       ))}
       <div></div>
       <div></div>
-    
-</div>
+    </div>
+  );
 
- 
- );
-      
- 
-
-if(showingDoneTasks){
-  return <DoneTasks  />
-};
+  if (showingDoneTasks) {
+    return <DoneTasks />;
+  }
 
   function newTask() {
     setAddingToDo(true);
@@ -317,7 +335,10 @@ if(showingDoneTasks){
     // event.preventDefault();
     const data = Object.fromEntries(
       new FormData(event.target as HTMLFormElement)
-    );
+    ); 
+    const newDueDate = new Date(data.Date as string)
+    const timeZoneCorrectedDate = new Date(newDueDate.getTime()+newDueDate.getTimezoneOffset()*60*1000)//
+    debugger
     setToDos([
       ...toDos,
       {
@@ -325,6 +346,8 @@ if(showingDoneTasks){
         priority: parseInt(data.Priority as string) as 2 | 1,
         description: data.Description as string,
         checked: false,
+        duedate: data.Date ? timeZoneCorrectedDate.getTime() : undefined,
+
       },
     ]);
   }
@@ -372,9 +395,7 @@ if(showingDoneTasks){
           </p>
         </form>
       </div>
-      
     );
-  
   }
 
   return (
@@ -403,20 +424,23 @@ if(showingDoneTasks){
           {toDos.length} {toDos.length === 1 ? "Task" : "Tasks"}
         </div>
         <div className="status-container">
-          <button className="activeButton"onClick={showActive}>Active</button>
-          <button className="doneButton" onClick={showDone}>Done
+          <button className="activeButton" onClick={showActive}>
+            Active
+          </button>
+          <button className="doneButton" onClick={showDone}>
+            Done
           </button>
         </div>
-      
       </div>
       <hr />
-      { showingDoneTasks ? <DoneTasks /> : null }
+      {showingDoneTasks ? <DoneTasks /> : null}
       {/* <ToDoItem toDo={myToDo1} /> */}
       {/* <ToDoItem toDo={myToDo2} /> */}
       {/* toDos is the source array, map is creating a new array by calling the 
       given function in each item in the source array, it is then passed to the ToDo(interface) item component
       ToDoItem component has props(toDo=toDoItem,onDeleteToDo) */}
       {/* toDoItem=name of each object in the toDos array, ToDo is an interface that is the typeof the function argument*/}
+
       {visibleTodos.map((toDoItem: ToDo) => (
         <ToDoItem
           onDeleteToDo={function () {
@@ -424,47 +448,38 @@ if(showingDoneTasks){
             setToDos(updatedToDos);
             ////
           }}
+          onCheckBoxCheck={function (checked: true | false) {
+            const updatedToDos = toDos.map((x) =>
+              x === toDoItem ? ({ ...x, checked } as any) : x
+            );
+            // if (checked === true) return
+            // <DoneTasks/>
+            // showDone()
+            // console.log(updatedToDos);
+            setToDos(updatedToDos);
 
-         
-          
-          onCheckBoxCheck={function(checked: true | false) {
+            // const doneToDos = toDos.filter((x) => x !== toDoItem);
+            // doneToDos.map((toDoItem: ToDo) => (
+            // <DoneTasks/>
+            // ))
+            //     // if (checked === true)
+            //     // return toDos.filter((x) => x !== toDoItem);
+            //     // return toDos.map((toDoItem: ToDo) => (
+            //     //   <DoneTasks/>
+            //     // ))
 
-              const updatedToDos = toDos.map((x) =>
-                x === toDoItem ? ({ ...x, checked } as any) : x
-              );
-              // if (checked === true) return
-              // <DoneTasks/>
-              // showDone()
-              // console.log(updatedToDos);
-              setToDos(updatedToDos);
-           
-
-          // const doneToDos = toDos.filter((x) => x !== toDoItem);
-          // doneToDos.map((toDoItem: ToDo) => (
-          // <DoneTasks/>
-          // ))
-          //     // if (checked === true)
-          //     // return toDos.filter((x) => x !== toDoItem);
-          //     // return toDos.map((toDoItem: ToDo) => (
-          //     //   <DoneTasks/>
-          //     // ))
-            
-          //   // console.log(doneToDos)
-        
-   
-        }}
-      
+            //   // console.log(doneToDos)
+          }}
           //Priority function to call to return a different colored div
 
           prioritySelect={function (updatedPriority: any) {
             const updatedToDos = toDos.map((x) =>
               x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
             );
-           
+
             setToDos(updatedToDos);
           }}
           toDo={toDoItem}
-
         />
       ))}
     </div>
