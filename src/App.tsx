@@ -140,8 +140,8 @@ const initialTodos = initialTodosString
 function App(): JSX.Element {
   const [toDos, setToDos] = useState<ToDo[]>(initialTodos);
   const [addingToDo, setAddingToDo] = useState(false);
-  const [showingDoneTasks, setShowDoneTasks] = useState(false);
-  const [showingActiveTasks, setShowActiveTasks] = useState(false);
+  const [showingDoneTasks, setShowDoneTasks] = useState(false); // show true if not
+  const [showingActiveTasks, setShowActiveTasks] = useState(false); // show true if not
   const [filterTodosCompleted, setFilterTodosCompleted] = useState<any | null>(
     null
   );
@@ -184,6 +184,7 @@ function App(): JSX.Element {
   function showActive() {
     setShowActiveTasks(true);
     setFilterTodosCompleted(false);
+    setShowDoneTasks(false)
   }
 
   const ActiveTasks = () => (
@@ -256,6 +257,7 @@ function App(): JSX.Element {
   function showDone() {
     setShowDoneTasks(true);
     setFilterTodosCompleted(true);
+    setShowActiveTasks(false)
   }
 
   const DoneTasks = () => (
