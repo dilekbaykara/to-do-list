@@ -57,7 +57,7 @@ function ToDoItem(props: {
   prioritySelect: any; // todo: remove this
   onCheckBoxCheck: any; // todo: remove this
   handleDateChange: any; // todo: remove this
-  onUpdateTodo: any;
+  // onUpdateTodo: any; -- condense to this
 }) {
   const handleOptionsChange = (event: any) => {
     const selectBox = event.target;
@@ -125,8 +125,8 @@ function ToDoItem(props: {
             Delete
           </button>
         </div>
-        <span className="to-do-date">
-        <input name="Date" type="date" className="input-field" value={props.toDo.duedate
+        <span className="to-do-date-container">
+        <input name="Date" type="date" className="to-do-input-field" value={props.toDo.duedate
             ? new Date(props.toDo.duedate).toISOString().split('T')[0]
             : undefined} onChange={handleDateChange}/>
          
@@ -261,10 +261,10 @@ function App(): JSX.Element {
 
             setToDos(updatedToDos)
           }}
-          onUpdateTodo={function (updates: any) {
-            console.log(updates)
+          // onUpdateTodo={function (updates: any) {
+          //   console.log(updates)
             // todo
-          }}
+          // }}
         />
       ))}
       <div></div>

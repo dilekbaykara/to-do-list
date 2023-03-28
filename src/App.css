@@ -110,10 +110,16 @@
   flex-direction: row;
 }
 
-/* .description{
+.to-do-input-field{
+  font-family: elza, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  border: 1px solid #131b2d;
+  border-radius: 19px;
+  color:#131b2d;
+  background: rgb(255, 255, 255, .5);
+}
 
-
-}  */
 
 .form-container {
   display: flex;
