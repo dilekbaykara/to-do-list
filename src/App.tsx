@@ -126,7 +126,7 @@ function ToDoItem(props: {
           </button>
         </div>
         <span className="to-do-date-container">
-        <input name="Date" type="date" className="to-do-input-field" value={props.toDo.duedate
+        <input name="Date" type="date" className="to-do-date-input" value={props.toDo.duedate
             ? new Date(props.toDo.duedate).toISOString().split('T')[0]
             : undefined} onChange={handleDateChange}/>
          

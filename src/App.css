@@ -110,7 +110,7 @@
   flex-direction: row;
 }
 
-.to-do-input-field{
+.to-do-date-input{
   font-family: elza, sans-serif;
   font-weight: 400;
   font-style: normal;
@@ -120,6 +120,12 @@
   background: rgb(255, 255, 255, .5);
 }
 
+.to-do-date-input:active{
+  background: rgb(255, 255, 255);
+}
+.to-do-date-input:focus{
+  background: rgb(255, 255, 255);
+}
 
 .form-container {
   display: flex;
