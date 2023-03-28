@@ -54,21 +54,32 @@ const myToDo2: ToDo = {
 function ToDoItem(props: {
   toDo: ToDo;
   onDeleteToDo: any;
-  prioritySelect: any;
-  onCheckBoxCheck: any;
+  prioritySelect: any; // todo: remove this
+  onCheckBoxCheck: any; // todo: remove this
+  handleDateChange: any; // todo: remove this
+  onUpdateTodo: any;
 }) {
   const handleOptionsChange = (event: any) => {
     const selectBox = event.target;
     const newValue = selectBox.value;
     const newPriorityNumber = parseInt(newValue);
-    props.prioritySelect(newPriorityNumber);
+    props.prioritySelect(newPriorityNumber); // todo: remove
+    // props.onUpdateToDo({ priority: newPriority })
   };
   const checkBoxCheck = (event: any) => {
     const checkBox = event.currentTarget.checked;
     const newCheckBoxValue = checkBox;
     console.log(checkBox);
-    props.onCheckBoxCheck(newCheckBoxValue);
+    props.onCheckBoxCheck(newCheckBoxValue);// todo: remove
+    // props.onUpdateTodo({ checked: newCheckBoxValue })
   };
+  const handleDateChange =(event: any) => {
+    const newDate = event.target.value;
+    props.handleDateChange(newDate); // todo: remove
+    // props.onUpdateTodo({ duedate: newDate })
+
+    console.log(newDate)
+  }
 
   // {
   //   // const newDate=
@@ -115,9 +126,10 @@ function ToDoItem(props: {
           </button>
         </div>
         <span className="to-do-date">
-          {props.toDo.duedate
-            ? new Date(props.toDo.duedate).toLocaleDateString()
-            : null}
+        <input name="Date" type="date" className="input-field" value={props.toDo.duedate
+            ? new Date(props.toDo.duedate).toISOString().split('T')[0]
+            : undefined} onChange={handleDateChange}/>
+         
         </span>
         <div className="description-box">
           <span className="description">{props.toDo.description}</span>
@@ -243,6 +255,16 @@ function App(): JSX.Element {
             );
             setToDos(updatedToDos);
           }}
+          handleDateChange={function(newDate: any){
+            const updatedToDos = toDos.map((x) => 
+            x === toDoItem ? ({...x, date: newDate } as any) : x);
+
+            setToDos(updatedToDos)
+          }}
+          onUpdateTodo={function (updates: any) {
+            console.log(updates)
+            // todo
+          }}
         />
       ))}
       <div></div>
@@ -317,6 +339,12 @@ function App(): JSX.Element {
               x === toDoItem ? ({ ...x, checked } as any) : x
             );
             setToDos(updatedToDos);
+          }}
+          handleDateChange={function(newDate: any){
+            const updatedToDos = toDos.map((x) => 
+            x === toDoItem ? ({...x, date: newDate } as any) : x);
+
+            setToDos(updatedToDos)
           }}
         />
       ))}
@@ -460,6 +488,8 @@ function App(): JSX.Element {
             // console.log(updatedToDos);
             setToDos(updatedToDos);
 
+
+
             // const doneToDos = toDos.filter((x) => x !== toDoItem);
             // doneToDos.map((toDoItem: ToDo) => (
             // <DoneTasks/>
@@ -471,6 +501,13 @@ function App(): JSX.Element {
             //     // ))
 
             //   // console.log(doneToDos)
+          }}
+
+          handleDateChange={function(newDate: any){
+            const updatedToDos = toDos.map((x) => 
+            x === toDoItem ? ({...x, duedate: newDate } as any) : x);
+
+            setToDos(updatedToDos)
           }}
           //Priority function to call to return a different colored div
 
