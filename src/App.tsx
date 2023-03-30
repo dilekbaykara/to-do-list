@@ -54,29 +54,31 @@ const myToDo2: ToDo = {
 function ToDoItem(props: {
   toDo: ToDo;
   onDeleteToDo: any;
-  prioritySelect: any; // todo: remove this
-  onCheckBoxCheck: any; // todo: remove this
-  handleDateChange: any; // todo: remove this
-  // onUpdateTodo: any; -- condense to this
+  // prioritySelect: any; // todo: remove this
+  // onCheckBoxCheck: any; // todo: remove this
+  // handleDateChange: any; // todo: remove this
+  onUpdateTodo: any; // condense to this
 }) {
   const handleOptionsChange = (event: any) => {
     const selectBox = event.target;
     const newValue = selectBox.value;
-    const newPriorityNumber = parseInt(newValue);
-    props.prioritySelect(newPriorityNumber); // todo: remove
-    // props.onUpdateToDo({ priority: newPriority })
+    const newPriority = parseInt(newValue);
+    // props.prioritySelect(newPriorityNumber); // todo: remove
+    // Homework
+    props.onUpdateTodo({ priority: newPriority })
   };
   const checkBoxCheck = (event: any) => {
     const checkBox = event.currentTarget.checked;
     const newCheckBoxValue = checkBox;
-    console.log(checkBox);
-    props.onCheckBoxCheck(newCheckBoxValue);// todo: remove
-    // props.onUpdateTodo({ checked: newCheckBoxValue })
+    // console.log(checkBox);
+    // props.onCheckBoxCheck(newCheckBoxValue);// todo: remove
+    // Homework
+    props.onUpdateTodo({ checked: newCheckBoxValue })
   };
   const handleDateChange =(event: any) => {
     const newDate = event.target.value;
-    props.handleDateChange(newDate); // todo: remove
-    // props.onUpdateTodo({ duedate: newDate })
+    // props.handleDateChange(newDate); // todo: remove
+    props.onUpdateTodo({ duedate: newDate })
 
     console.log(newDate)
   }
@@ -242,29 +244,32 @@ function App(): JSX.Element {
             const updatedToDos = toDos.filter((x) => x !== toDoItem);
             setToDos(updatedToDos);
           }}
-          prioritySelect={function (updatedPriority: any) {
-            const updatedToDos = toDos.map((x) =>
-              x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
-            );
+          // prioritySelect={function (updatedPriority: any) {
+          //   const updatedToDos = toDos.map((x) =>
+          //     x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
+          //   );
 
-            setToDos(updatedToDos);
-          }}
-          onCheckBoxCheck={function (checked: true | false) {
-            const updatedToDos = toDos.map((x) =>
-              x === toDoItem ? ({ ...x, checked } as any) : x
-            );
-            setToDos(updatedToDos);
-          }}
-          handleDateChange={function(newDate: any){
-            const updatedToDos = toDos.map((x) => 
-            x === toDoItem ? ({...x, date: newDate } as any) : x);
-
-            setToDos(updatedToDos)
-          }}
-          // onUpdateTodo={function (updates: any) {
-          //   console.log(updates)
-            // todo
+          //   setToDos(updatedToDos);
           // }}
+          // onCheckBoxCheck={function (checked: true | false) {
+          //   const updatedToDos = toDos.map((x) =>
+          //     x === toDoItem ? ({ ...x, checked } as any) : x
+          //   );
+          //   setToDos(updatedToDos);
+          // }}
+          // handleDateChange={function(newDate: any){
+          //   const updatedToDos = toDos.map((x) => 
+          //   x === toDoItem ? ({...x, date: newDate } as any) : x);
+
+          //   setToDos(updatedToDos)
+          // }}
+          onUpdateTodo={function (updates: any) {
+            const updatedToDos = toDos.map((x) => 
+            x === toDoItem ? ({...x, ...updates } as any) : x);
+          console.log(...updates)
+          setToDos(updatedToDos)
+            // todo
+          }}
         />
       ))}
       <div></div>
@@ -327,25 +332,30 @@ function App(): JSX.Element {
             setToDos(updatedToDos);
             ////
           }}
-          prioritySelect={function (updatedPriority: any) {
-            const updatedToDos = toDos.map((x) =>
-              x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
-            );
+            // prioritySelect={function (updatedPriority: any) {
+          //   const updatedToDos = toDos.map((x) =>
+          //     x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
+          //   );
 
-            setToDos(updatedToDos);
-          }}
-          onCheckBoxCheck={function (checked: true | false) {
-            const updatedToDos = toDos.map((x) =>
-              x === toDoItem ? ({ ...x, checked } as any) : x
-            );
-            setToDos(updatedToDos);
-          }}
-          handleDateChange={function(newDate: any){
+          //   setToDos(updatedToDos);
+          // }}
+          // onCheckBoxCheck={function (checked: true | false) {
+          //   const updatedToDos = toDos.map((x) =>
+          //     x === toDoItem ? ({ ...x, checked } as any) : x
+          //   );
+          //   setToDos(updatedToDos);
+          // }}
+          // handleDateChange={function(newDate: any){
+          //   const updatedToDos = toDos.map((x) => 
+          //   x === toDoItem ? ({...x, date: newDate } as any) : x);
+
+          //   setToDos(updatedToDos)
+          // }}
+          onUpdateTodo={function (updates: any) {
             const updatedToDos = toDos.map((x) => 
-            x === toDoItem ? ({...x, date: newDate } as any) : x);
-
-            setToDos(updatedToDos)
-          }}
+            x === toDoItem ? ({...x, ...updates } as any) : x);
+          console.log(updates)
+          setToDos(updatedToDos)}}
         />
       ))}
       <div></div>
@@ -478,46 +488,31 @@ function App(): JSX.Element {
             setToDos(updatedToDos);
             ////
           }}
-          onCheckBoxCheck={function (checked: true | false) {
-            const updatedToDos = toDos.map((x) =>
-              x === toDoItem ? ({ ...x, checked } as any) : x
-            );
-            // if (checked === true) return
-            // <DoneTasks/>
-            // showDone()
-            // console.log(updatedToDos);
-            setToDos(updatedToDos);
+          // prioritySelect={function (updatedPriority: any) {
+          //   const updatedToDos = toDos.map((x) =>
+          //     x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
+          //   );
 
+          //   setToDos(updatedToDos);
+          // }}
+          // onCheckBoxCheck={function (checked: true | false) {
+          //   const updatedToDos = toDos.map((x) =>
+          //     x === toDoItem ? ({ ...x, checked } as any) : x
+          //   );
+          //   setToDos(updatedToDos);
+          // }}
+          // handleDateChange={function(newDate: any){
+          //   const updatedToDos = toDos.map((x) => 
+          //   x === toDoItem ? ({...x, date: newDate } as any) : x);
 
-
-            // const doneToDos = toDos.filter((x) => x !== toDoItem);
-            // doneToDos.map((toDoItem: ToDo) => (
-            // <DoneTasks/>
-            // ))
-            //     // if (checked === true)
-            //     // return toDos.filter((x) => x !== toDoItem);
-            //     // return toDos.map((toDoItem: ToDo) => (
-            //     //   <DoneTasks/>
-            //     // ))
-
-            //   // console.log(doneToDos)
-          }}
-
-          handleDateChange={function(newDate: any){
+          //   setToDos(updatedToDos)
+          // }}
+          onUpdateTodo={function (updates: any) {
             const updatedToDos = toDos.map((x) => 
-            x === toDoItem ? ({...x, duedate: newDate } as any) : x);
-
-            setToDos(updatedToDos)
-          }}
-          //Priority function to call to return a different colored div
-
-          prioritySelect={function (updatedPriority: any) {
-            const updatedToDos = toDos.map((x) =>
-              x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
-            );
-
-            setToDos(updatedToDos);
-          }}
+            x === toDoItem ? ({...x, ...updates } as any) : x);
+          console.log(updates)
+          setToDos(updatedToDos);
+        }}
           toDo={toDoItem}
         />
       ))}
