@@ -5,7 +5,7 @@ import { ToDoItem } from "./ToDoItem";
   export const ActiveTasks = (props:{
     newTask: () => void
     showActive: () => void
-    toDos: ToDo[]
+    toDos: ToDo[];
   }) => (
     <div className="App">
       <div className="greeting-container">
