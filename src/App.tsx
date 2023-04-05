@@ -1,39 +1,11 @@
-import { useState, FormEvent, useEffect, useMemo } from "react"; //
-import { stringify } from "querystring";
-import { render } from "@testing-library/react";
-import React from "react";
-import { JsxEmit, toEditorSettings } from "typescript";
-import ReactDOM from "react-dom";
-import { getPriority, setPriority } from "os";
-import { parse } from "path";
-import { createRoot } from "react-dom/client";
+import { FormEvent, useEffect, useMemo, useState } from "react"; //
 import "./App.css";
+import { ActiveTasks } from "./components/Active";
+import { Greeting } from "./components/Greeting";
+import { ToDoItem } from "./components/ToDoItem";
+import { ToDo } from "./types/ToDo";
 
-// Time of day Greeting for User at top of page
 
-function Greeting() {
-  let timeOfDay;
-  const date = new Date();
-  const hours = date.getHours();
-
-  if (hours < 12) {
-    timeOfDay = "Morning";
-  } else if (hours >= 12 && hours < 17) {
-    timeOfDay = "Afternoon";
-  } else {
-    timeOfDay = "Evening";
-  }
-
-  return <h1>Good {timeOfDay}</h1>;
-}
-
-interface ToDo {
-  title: string;
-  priority: 1 | 2;
-  description: string;
-  checked: true | false;
-  duedate?: number;
-}
 
 const myToDo1: ToDo = {
   checked: true,
@@ -51,99 +23,7 @@ const myToDo2: ToDo = {
   title: "To Do",
 };
 
-function ToDoItem(props: {
-  toDo: ToDo;
-  onDeleteToDo: any;
-  // prioritySelect: any; // todo: remove this
-  // onCheckBoxCheck: any; // todo: remove this
-  // handleDateChange: any; // todo: remove this
-  onUpdateTodo: any; // condense to this
-}) {
-  const handleOptionsChange = (event: any) => {
-    const selectBox = event.target;
-    const newValue = selectBox.value;
-    const newPriority = parseInt(newValue);
-    // props.prioritySelect(newPriorityNumber); // todo: remove
-    // Homework
-    props.onUpdateTodo({ priority: newPriority })
-  };
-  const checkBoxCheck = (event: any) => {
-    const checkBox = event.currentTarget.checked;
-    const newCheckBoxValue = checkBox;
-    // console.log(checkBox);
-    // props.onCheckBoxCheck(newCheckBoxValue);// todo: remove
-    // Homework
-    props.onUpdateTodo({ checked: newCheckBoxValue })
-  };
-  const handleDateChange =(event: any) => {
-    const newDate = event.target.value;
-    // props.handleDateChange(newDate); // todo: remove
-    props.onUpdateTodo({ duedate: newDate })
 
-    console.log(newDate)
-  }
-
-  // {
-  //   // const newDate=
-
-  // }
-
-  if (!props.toDo) {
-    return <p>Missing To Do</p>;
-  }
-
-  // console.log(props.toDo)
-
-  return (
-    <div
-      className="to-do-item"
-      data-priority={props.toDo.priority}
-      id="to-do-item"
-    >
-      <div className="checkbox-title-container">
-        <div className="check-title-div">
-          <div>
-            <input
-              type="checkbox"
-              id="checkbox"
-              onChange={checkBoxCheck}
-              checked={props.toDo.checked}
-            />
-          </div>
-
-          <h2 className="to-do-title">{props.toDo.title}</h2>
-        </div>
-        <div id="delete-div">
-          <select
-            name="Priority"
-            className="select-field"
-            value={props.toDo.priority}
-            onChange={handleOptionsChange}
-          >
-            <option value="1">Important</option>
-            <option value="2">Normal</option>
-          </select>
-          <button id="delete" onClick={props.onDeleteToDo}>
-            Delete
-          </button>
-        </div>
-        <span className="to-do-date-container">
-        <input name="Date" type="date" className="to-do-date-input" value={props.toDo.duedate
-            ? new Date(props.toDo.duedate).toISOString().split('T')[0]
-            : undefined} onChange={handleDateChange}/>
-         
-        </span>
-        <div className="description-box">
-          <span className="description">{props.toDo.description}</span>
-        </div>
-      </div>
-      {/* <div className="description-box">
-        <span className="description">{props.toDo.description}</span>
-      </div> */}
-      <br />
-    </div>
-  );
-}
 
 const initialTodosString = localStorage.getItem("toDoList");
 
@@ -151,7 +31,7 @@ const initialTodos = initialTodosString
   ? JSON.parse(initialTodosString)
   : [myToDo1, myToDo2];
 
-function App(): JSX.Element {
+export function App(): JSX.Element {
   const [toDos, setToDos] = useState<ToDo[]>(initialTodos);
   const [addingToDo, setAddingToDo] = useState(false);
   const [showingDoneTasks, setShowDoneTasks] = useState(false); // show true if not
@@ -201,84 +81,12 @@ function App(): JSX.Element {
     setShowDoneTasks(false)
   }
 
-  const ActiveTasks = () => (
-    <div className="App">
-      <div className="greeting-container">
-        <div className="greeting">
-          <Greeting />
-        </div>
-        <button className="task-button" onClick={newTask}>
-          New Task
-        </button>
-        <div className="date-container">
-          Today is {new Date().toLocaleString("en-US", { weekday: "long" })}
-          <br />
-          <div className="current-date">
-            {new Date().toLocaleString("en-US", {
-              month: "long",
-              day: "2-digit",
-            })}
-            , {new Date().getFullYear()}
-          </div>
-        </div>
-      </div>
-      <div className="task-container">
-        <div id="completed-task-counter">
-          {toDos.length} {toDos.length === 1 ? "Active Task" : "Active Tasks"}
-        </div>
-        <div className="status-container">
-          <button className="activeButton" onClick={showActive}>
-            Active
-          </button>
-          <button className="doneButton" onClick={showDone}>
-            Done
-          </button>
-        </div>
-      </div>
-      <hr />
-
-      {visibleTodos.map((toDoItem) => (
-        <ToDoItem
-          toDo={toDoItem}
-          onDeleteToDo={function () {
-            const updatedToDos = toDos.filter((x) => x !== toDoItem);
-            setToDos(updatedToDos);
-          }}
-          // prioritySelect={function (updatedPriority: any) {
-          //   const updatedToDos = toDos.map((x) =>
-          //     x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
-          //   );
-
-          //   setToDos(updatedToDos);
-          // }}
-          // onCheckBoxCheck={function (checked: true | false) {
-          //   const updatedToDos = toDos.map((x) =>
-          //     x === toDoItem ? ({ ...x, checked } as any) : x
-          //   );
-          //   setToDos(updatedToDos);
-          // }}
-          // handleDateChange={function(newDate: any){
-          //   const updatedToDos = toDos.map((x) => 
-          //   x === toDoItem ? ({...x, date: newDate } as any) : x);
-
-          //   setToDos(updatedToDos)
-          // }}
-          onUpdateTodo={function (updates: any) {
-            const updatedToDos = toDos.map((x) => 
-            x === toDoItem ? ({...x, ...updates } as any) : x);
-          console.log(...updates)
-          setToDos(updatedToDos)
-            // todo
-          }}
-        />
-      ))}
-      <div></div>
-      <div></div>
-    </div>
-  );
+  function newTask() {
+    setAddingToDo(true);
+  }
 
   if (showingActiveTasks) {
-    return <ActiveTasks />;
+    return <ActiveTasks  newTask={newTask} showActive={showActive} {...toDos} />;
   }
 
   function showDone() {
@@ -367,9 +175,6 @@ function App(): JSX.Element {
     return <DoneTasks />;
   }
 
-  function newTask() {
-    setAddingToDo(true);
-  }
 
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     // event.preventDefault();
