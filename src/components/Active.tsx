@@ -6,6 +6,9 @@ import { ToDoItem } from "./ToDoItem";
     newTask: () => void
     showActive: () => void
     toDos: ToDo[];
+    showDone: () => void
+    visibleTodos: () => void
+    
   }) => (
     <div className="App">
       <div className="greeting-container">
@@ -29,51 +32,32 @@ import { ToDoItem } from "./ToDoItem";
       </div>
       <div className="task-container">
         <div id="completed-task-counter">
-          {toDos.length} {toDos.length === 1 ? "Active Task" : "Active Tasks"}
+          {props.toDos.length} {props.toDos.length === 1 ? "Active Task" : "Active Tasks"}
         </div>
         <div className="status-container">
           <button className="activeButton" onClick={props.showActive}>
             Active
           </button>
-          <button className="doneButton" onClick={showDone}>
+          <button className="doneButton" onClick={props.showDone}>
             Done
           </button>
         </div>
       </div>
       <hr />
 
-      {visibleTodos.map((toDoItem) => (
+      {props.visibleTodos.map((toDoItem: ToDo) => (
         <ToDoItem
           toDo={toDoItem}
           onDeleteToDo={function () {
-            const updatedToDos = toDos.filter((x) => x !== toDoItem);
+            const updatedToDos = toDos.filter((x: ToDo) => x !== toDoItem);
             setToDos(updatedToDos);
           }}
-          // prioritySelect={function (updatedPriority: any) {
-          //   const updatedToDos = toDos.map((x) =>
-          //     x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
-          //   );
-
-          //   setToDos(updatedToDos);
-          // }}
-          // onCheckBoxCheck={function (checked: true | false) {
-          //   const updatedToDos = toDos.map((x) =>
-          //     x === toDoItem ? ({ ...x, checked } as any) : x
-          //   );
-          //   setToDos(updatedToDos);
-          // }}
-          // handleDateChange={function(newDate: any){
-          //   const updatedToDos = toDos.map((x) => 
-          //   x === toDoItem ? ({...x, date: newDate } as any) : x);
-
-          //   setToDos(updatedToDos)
-          // }}
           onUpdateTodo={function (updates: any) {
-            const updatedToDos = toDos.map((x) => 
+            const updatedToDos = toDos.map((x: ToDo) => 
             x === toDoItem ? ({...x, ...updates } as any) : x);
           console.log(...updates)
           setToDos(updatedToDos)
-            // todo
+           
           }}
         />
       ))}

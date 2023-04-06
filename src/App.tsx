@@ -45,24 +45,15 @@ export function App(): JSX.Element {
     () =>
       toDos.filter((toDo) => {
         if (filterTodosCompleted === null) {
-          return true; // if null show all
+          return true; 
         }
-        return filterTodosCompleted === toDo.checked; // show only if completed state matches filter
+        return filterTodosCompleted === toDo.checked; 
       }),
     [filterTodosCompleted, toDos]
-    // dependencies, when to recalculate
+  
   );
 
-  // function showCompletedTasks(){
-  // // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  // setFilterTodosCompleted(null)
-  //  }
 
-  // const []
-  //added 3-12
-
-  // function TodoList({toDos, }) {
-  //   const visibleTodos = useMemo(() => filterTodos(todos, tab), [todos, tab]);
 
   useEffect(
     function () {
@@ -86,7 +77,7 @@ export function App(): JSX.Element {
   }
 
   if (showingActiveTasks) {
-    return <ActiveTasks  newTask={newTask} showActive={showActive} toDos={toDos} />;
+    return <ActiveTasks  newTask={newTask} showActive={showActive} toDos={toDos} showDone={showDone} visibleTodos={visibleTodos}/>;
   }
 
   function showDone() {
