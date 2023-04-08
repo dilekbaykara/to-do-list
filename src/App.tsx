@@ -55,7 +55,6 @@ export function App(): JSX.Element {
   );
 
 
-
   useEffect(
     function () {
       localStorage.setItem("toDoList", JSON.stringify(toDos));
