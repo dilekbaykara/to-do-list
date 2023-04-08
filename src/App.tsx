@@ -90,7 +90,7 @@ export function App(): JSX.Element {
  
 
   if (showingDoneTasks) {
-    return <DoneTasks />;
+    return <DoneTasks newTask={newTask} showActive={showActive} toDos={toDos} showDone={showDone} visibleTodos={toDos} />;
   }
 
 
@@ -196,7 +196,7 @@ export function App(): JSX.Element {
         </div>
       </div>
       <hr />
-      {showingDoneTasks ? <DoneTasks /> : null}
+      {showingDoneTasks ? <DoneTasks newTask={newTask} showActive={showActive} toDos={toDos} showDone={showDone} visibleTodos={toDos} /> : null}
       {/* <ToDoItem toDo={myToDo1} /> */}
       {/* <ToDoItem toDo={myToDo2} /> */}
       {/* toDos is the source array, map is creating a new array by calling the 
