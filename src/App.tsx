@@ -77,7 +77,7 @@ export function App(): JSX.Element {
   }
 
   if (showingActiveTasks) {
-    return <ActiveTasks  newTask={newTask} showActive={showActive} toDos={toDos} showDone={showDone} visibleTodos={visibleTodos}/>;
+    return <ActiveTasks  newTask={newTask} showActive={showActive} toDos={toDos} showDone={showDone} visibleTodos={toDos}/>;
   }
 
   function showDone() {

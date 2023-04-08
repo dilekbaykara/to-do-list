@@ -7,7 +7,7 @@ import { ToDoItem } from "./ToDoItem";
     showActive: () => void
     toDos: ToDo[];
     showDone: () => void
-    visibleTodos: () => void
+    visibleTodos: ToDo[];
     
   }) => (
     <div className="App">
@@ -65,3 +65,6 @@ import { ToDoItem } from "./ToDoItem";
       <div></div>
     </div>
   );
+function setToDos(updatedToDos: any) {
+  throw new Error("Function not implemented.");
+}
