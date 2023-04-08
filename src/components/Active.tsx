@@ -49,11 +49,11 @@ import { ToDoItem } from "./ToDoItem";
         <ToDoItem
           toDo={toDoItem}
           onDeleteToDo={function () {
-            const updatedToDos = toDos.filter((x: ToDo) => x !== toDoItem);
+            const updatedToDos = props.toDos.filter((x: ToDo) => x !== toDoItem);
             setToDos(updatedToDos);
           }}
           onUpdateTodo={function (updates: any) {
-            const updatedToDos = toDos.map((x: ToDo) => 
+            const updatedToDos = props.toDos.map((x: ToDo) => 
             x === toDoItem ? ({...x, ...updates } as any) : x);
           console.log(...updates)
           setToDos(updatedToDos)
