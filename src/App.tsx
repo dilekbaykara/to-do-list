@@ -5,6 +5,7 @@ import { Greeting } from "./components/Greeting";
 import { ToDoItem } from "./components/ToDoItem";
 import { ToDo } from "./types/ToDo";
 import { DoneTasks } from "./components/Done";
+import { NewTask } from "./components/NewTask"
 
 
 
@@ -93,6 +94,11 @@ export function App(): JSX.Element {
   }
 
 
+
+  if (addingToDo) {
+    return <NewTask newTask={newTask} showActive={showActive} toDos={toDos} showDone={showDone} visibleTodos={toDos} handleFormSubmit={handleFormSubmit} />
+  }
+
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     // event.preventDefault();
     const data = Object.fromEntries(
@@ -109,55 +115,9 @@ export function App(): JSX.Element {
         description: data.Description as string,
         checked: false,
         duedate: data.Date ? timeZoneCorrectedDate.getTime() : undefined,
-
+  
       },
     ]);
-  }
-
-  if (addingToDo) {
-    return (
-      <div className="form-container">
-        <form onSubmit={handleFormSubmit}>
-          <h1>To Do Form </h1>
-          <p>
-            <label>Title</label>
-          </p>
-          <p>
-            <input name="Title" className="input-field" id="title" />
-          </p>
-          <p>
-            <label>Due Date</label>
-          </p>
-          <p>
-            <input name="Date" type="date" className="input-field" />
-          </p>
-          <p>
-            <label>Priority</label>
-          </p>
-          <p>
-            <select name="Priority" className="input-field">
-              <option className="important" value="1">
-                Important
-              </option>
-              <option selected value="2">
-                Normal
-              </option>
-
-              {/* <option>Urgent</option> */}
-            </select>
-          </p>
-          <p>
-            <label>Description</label>
-          </p>
-          <p>
-            <input name="Description" className="input-field" />
-          </p>
-          <p>
-            <input type="submit" value="Add" className="submit" />
-          </p>
-        </form>
-      </div>
-    );
   }
 
   return (
