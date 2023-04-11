@@ -50,10 +50,9 @@ export const ActiveTasks = (props: {
       <hr />
 
       {props.toDos
-        .filter((x) => x.checked === false)
+        .filter((x) => !x.checked)
         .map((toDoItem: ToDo) => (
           <ToDoItem
-            toDo={toDoItem}
             onDeleteToDo={function () {
               const updatedToDos = props.toDos.filter(
                 (x: ToDo) => x !== toDoItem
@@ -64,9 +63,9 @@ export const ActiveTasks = (props: {
               const updatedToDos = props.toDos.map((x: ToDo) =>
                 x === toDoItem ? ({ ...x, ...updates } as any) : x
               );
-              console.log(...updates);
               props.setToDos(updatedToDos);
             }}
+            toDo={toDoItem}
           />
         ))}
       <div></div>
