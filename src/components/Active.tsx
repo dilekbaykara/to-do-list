@@ -2,14 +2,16 @@ import { ToDo } from "../types/ToDo";
 import { Greeting } from "./Greeting";
 import { ToDoItem } from "./ToDoItem";
 
-  export const ActiveTasks = (props:{
-    newTask: () => void
-    showActive: () => void
-    toDos: ToDo[];
-    showDone: () => void
-    visibleTodos: ToDo[];
-    
-  }) => (
+export const ActiveTasks = (props: {
+  newTask: () => void;
+  toDos: ToDo[];
+  showAllTasks: () => void;
+  showDone: () => void;
+  setToDos: (value: React.SetStateAction<ToDo[]>) => void;
+}) => {
+  const activeToDos = props.toDos.filter((x) => x.checked === false);
+
+  return (
     <div className="App">
       <div className="greeting-container">
         <div className="greeting">
@@ -32,39 +34,43 @@ import { ToDoItem } from "./ToDoItem";
       </div>
       <div className="task-container">
         <div id="completed-task-counter">
-          {props.toDos.length} {props.toDos.length === 1 ? "Active Task" : "Active Tasks"}
+          {activeToDos.length}{" "}
+          {activeToDos.length === 1 ? "Active Task" : "Active Tasks"}
         </div>
         <div className="status-container">
-          <button className="activeButton" onClick={props.showActive}>
-            Active
+          <button id="allButton" onClick={props.showAllTasks}>
+            All
           </button>
-          <button className="doneButton" onClick={props.showDone}>
+          <button id="activeButton">Active</button>
+          <button id="doneButton" onClick={props.showDone}>
             Done
           </button>
         </div>
       </div>
       <hr />
 
-      {props.visibleTodos.map((toDoItem: ToDo) => (
-        <ToDoItem
-          toDo={toDoItem}
-          onDeleteToDo={function () {
-            const updatedToDos = props.toDos.filter((x: ToDo) => x !== toDoItem);
-            setToDos(updatedToDos);
-          }}
-          onUpdateTodo={function (updates: any) {
-            const updatedToDos = props.toDos.map((x: ToDo) => 
-            x === toDoItem ? ({...x, ...updates } as any) : x);
-          console.log(...updates)
-          setToDos(updatedToDos)
-           
-          }}
-        />
-      ))}
+      {props.toDos
+        .filter((x) => x.checked === false)
+        .map((toDoItem: ToDo) => (
+          <ToDoItem
+            toDo={toDoItem}
+            onDeleteToDo={function () {
+              const updatedToDos = props.toDos.filter(
+                (x: ToDo) => x !== toDoItem
+              );
+              props.setToDos(updatedToDos);
+            }}
+            onUpdateTodo={function (updates: any) {
+              const updatedToDos = props.toDos.map((x: ToDo) =>
+                x === toDoItem ? ({ ...x, ...updates } as any) : x
+              );
+              console.log(...updates);
+              props.setToDos(updatedToDos);
+            }}
+          />
+        ))}
       <div></div>
       <div></div>
     </div>
   );
-function setToDos(updatedToDos: any) {
-  throw new Error("Function not implemented.");
-}
+};

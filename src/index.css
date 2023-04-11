@@ -9,7 +9,7 @@ body {
   color: #ffff;
 }
 
-.greeting-container{
+.greeting-container {
   margin-top: 1rem;
   margin-bottom: 0;
   display: grid;
@@ -20,13 +20,13 @@ body {
   margin-right: 1.5rem;
 }
 
-.greeting{
-  grid-column: 1 /span 4;
+.greeting {
+  grid-column: 1 / span 4;
   grid-row: 1;
   text-align: left;
 }
 
-.task-button{
+.task-button {
   justify-self: end;
   font-size: 1rem;
   grid-column: 5;
@@ -35,75 +35,90 @@ body {
   width: 7rem;
 }
 
-
 .date-container {
   display: flex;
-  grid-column: 1 /span 4;
+  grid-column: 1 / span 4;
   grid-row: 2;
   flex-direction: column;
   align-items: flex-start;
   font-size: 18px;
 }
 
-.current-date{
+.current-date {
   font-size: 15px;
-  color:#566995;
+  color: #566995;
 }
 
-
-h1{
+h1 {
   font-family: elza, sans-serif;
   font-weight: 500;
   font-style: normal;
-  color:#6889f7;
+  color: #6889f7;
   font-size: 3rem;
 }
 
-hr{
- display: flex;
- margin-top: 1rem;
- margin-bottom: 1rem;
- width: 92%;
+hr {
+  display: flex;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  width: 92%;
 }
-
 
 .task-container {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   font-size: 2rem;
-  color:#6889f7;
+  color: #6889f7;
 }
 
-.task-counter{
+.task-counter {
   grid-column: 1;
   grid-row: 1;
   width: 10rem;
 }
 
-.status-container{
+.status-container {
+  display: flex;
   grid-column: 5;
   grid-row: 1;
   width: 10rem;
-  justify-self: end;
+  justify-self: start;
+  flex-direction: row;
 }
 
-button{
+button {
   font-family: elza, sans-serif;
   font-weight: 400;
   font-style: normal;
   border: 1px solid #6889f7;
   border-radius: 19px;
-  color:#ffff;
+  color: #ffff;
   padding: 9px;
   background-color: #131b2d;
   width: 4rem;
 }
 
-button:hover{
+button:hover {
   background-color: #6889f7;
-  color:#131b2d;
+  color: #131b2d;
 }
 
-.activeButton{
-  margin-right: 0.2rem;
+#activeButton {
+  margin-left: 4px;
+  margin-right: 4px;
+  width: 4rem;
+  height: 2.5rem;
+  border-radius: 17px;
+}
+
+#doneButton {
+  border-radius: 17px;
+  width: 4rem;
+  height: 2.5rem;
+}
+
+#allButton {
+  width: 4rem;
+  border-radius: 17px;
+  height: 2.5rem;
 }

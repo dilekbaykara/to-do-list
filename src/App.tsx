@@ -1,13 +1,10 @@
-import { FormEvent, useEffect, useMemo, useState } from "react"; //
+import { FormEvent, useEffect, useState } from "react"; //
 import "./App.css";
 import { ActiveTasks } from "./components/Active";
-import { Greeting } from "./components/Greeting";
-import { ToDoItem } from "./components/ToDoItem";
-import { ToDo } from "./types/ToDo";
+import { AllTasks } from "./components/All";
 import { DoneTasks } from "./components/Done";
-import { NewTask } from "./components/NewTask"
-
-
+import { NewTask } from "./components/NewTask";
+import { ToDo } from "./types/ToDo";
 
 const myToDo1: ToDo = {
   checked: true,
@@ -25,8 +22,6 @@ const myToDo2: ToDo = {
   title: "To Do",
 };
 
-
-
 const initialTodosString = localStorage.getItem("toDoList");
 
 const initialTodos = initialTodosString
@@ -38,23 +33,6 @@ export function App(): JSX.Element {
   const [addingToDo, setAddingToDo] = useState(false);
   const [showingDoneTasks, setShowDoneTasks] = useState(false); // show true if not
   const [showingActiveTasks, setShowActiveTasks] = useState(false); // show true if not
-  const [filterTodosCompleted, setFilterTodosCompleted] = useState<any | null>(
-    null
-  );
-  //  const [filterState, setFilterState] = useState<FilterState>(0);
-
-  const visibleTodos = useMemo(
-    () =>
-      toDos.filter((toDo) => {
-        if (filterTodosCompleted === null) {
-          return true; 
-        }
-        return filterTodosCompleted === toDo.checked; 
-      }),
-    [filterTodosCompleted, toDos]
-  
-  );
-
 
   useEffect(
     function () {
@@ -63,50 +41,16 @@ export function App(): JSX.Element {
     [toDos]
   );
 
-  // function assignDoneToDo() {
-
-  // }
-
-  function showActive() {
-    setShowActiveTasks(true);
-    setFilterTodosCompleted(false);
-    setShowDoneTasks(false)
-  }
-
-  function newTask() {
-    setAddingToDo(true);
-  }
-
-  if (showingActiveTasks) {
-    return <ActiveTasks  newTask={newTask} showActive={showActive} toDos={toDos} showDone={showDone} visibleTodos={toDos}/>;
-  }
-
-  function showDone() {
-    setShowDoneTasks(true);
-    setFilterTodosCompleted(true);
-    setShowActiveTasks(false)
-  }
-
- 
-
-  if (showingDoneTasks) {
-    return <DoneTasks newTask={newTask} showActive={showActive} toDos={toDos} showDone={showDone} visibleTodos={toDos} />;
-  }
-
-
-
-  if (addingToDo) {
-    return <NewTask newTask={newTask} showActive={showActive} toDos={toDos} showDone={showDone} visibleTodos={toDos} handleFormSubmit={handleFormSubmit} />
-  }
-
   function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
     // event.preventDefault();
     const data = Object.fromEntries(
       new FormData(event.target as HTMLFormElement)
-    ); 
-    const newDueDate = new Date(data.Date as string)
-    const timeZoneCorrectedDate = new Date(newDueDate.getTime()+newDueDate.getTimezoneOffset()*60*1000)//
-    debugger
+    );
+    const newDueDate = new Date(data.Date as string);
+    const timeZoneCorrectedDate = new Date(
+      newDueDate.getTime() + newDueDate.getTimezoneOffset() * 60 * 1000
+    ); //
+    debugger;
     setToDos([
       ...toDos,
       {
@@ -115,90 +59,65 @@ export function App(): JSX.Element {
         description: data.Description as string,
         checked: false,
         duedate: data.Date ? timeZoneCorrectedDate.getTime() : undefined,
-  
       },
     ]);
   }
 
+  if (addingToDo) {
+    return <NewTask handleFormSubmit={handleFormSubmit} />;
+  }
+
+  function showAllTasks() {
+    setShowDoneTasks(false);
+    setShowActiveTasks(false);
+  }
+
+  function showDone() {
+    setShowDoneTasks(true);
+    setShowActiveTasks(false);
+  }
+
+  function showActive() {
+    setShowActiveTasks(true);
+    setShowDoneTasks(false);
+  }
+
+  function newTask() {
+    setAddingToDo(true);
+  }
+
+  if (showingActiveTasks) {
+    return (
+      <ActiveTasks
+        setToDos={setToDos}
+        showAllTasks={showAllTasks}
+        newTask={newTask}
+        toDos={toDos}
+        showDone={showDone}
+      />
+    );
+  }
+
+  if (showingDoneTasks) {
+    return (
+      <DoneTasks
+        newTask={newTask}
+        showActive={showActive}
+        toDos={toDos}
+        setToDos={setToDos}
+        showAllTasks={showAllTasks}
+      />
+    );
+  }
+
   return (
-    <div className="App">
-      <div className="greeting-container">
-        <div className="greeting">
-          <Greeting />
-        </div>
-        <button className="task-button" onClick={newTask}>
-          New Task
-        </button>
-        <div className="date-container">
-          Today is {new Date().toLocaleString("en-US", { weekday: "long" })}
-          <br />
-          <div className="current-date">
-            {new Date().toLocaleString("en-US", {
-              month: "long",
-              day: "2-digit",
-            })}
-            , {new Date().getFullYear()}
-          </div>
-        </div>
-      </div>
-      <div className="task-container">
-        <div className="task-counter">
-          {toDos.length} {toDos.length === 1 ? "Task" : "Tasks"}
-        </div>
-        <div className="status-container">
-          <button className="activeButton" onClick={showActive}>
-            Active
-          </button>
-          <button className="doneButton" onClick={showDone}>
-            Done
-          </button>
-        </div>
-      </div>
-      <hr />
-      {showingDoneTasks ? <DoneTasks newTask={newTask} showActive={showActive} toDos={toDos} showDone={showDone} visibleTodos={toDos} /> : null}
-      {/* <ToDoItem toDo={myToDo1} /> */}
-      {/* <ToDoItem toDo={myToDo2} /> */}
-      {/* toDos is the source array, map is creating a new array by calling the 
-      given function in each item in the source array, it is then passed to the ToDo(interface) item component
-      ToDoItem component has props(toDo=toDoItem,onDeleteToDo) */}
-      {/* toDoItem=name of each object in the toDos array, ToDo is an interface that is the typeof the function argument*/}
-
-      {visibleTodos.map((toDoItem: ToDo) => (
-        <ToDoItem
-          onDeleteToDo={function () {
-            const updatedToDos = toDos.filter((x) => x !== toDoItem);
-            setToDos(updatedToDos);
-            ////
-          }}
-          // prioritySelect={function (updatedPriority: any) {
-          //   const updatedToDos = toDos.map((x) =>
-          //     x === toDoItem ? ({ ...x, priority: updatedPriority } as any) : x
-          //   );
-
-          //   setToDos(updatedToDos);
-          // }}
-          // onCheckBoxCheck={function (checked: true | false) {
-          //   const updatedToDos = toDos.map((x) =>
-          //     x === toDoItem ? ({ ...x, checked } as any) : x
-          //   );
-          //   setToDos(updatedToDos);
-          // }}
-          // handleDateChange={function(newDate: any){
-          //   const updatedToDos = toDos.map((x) => 
-          //   x === toDoItem ? ({...x, date: newDate } as any) : x);
-
-          //   setToDos(updatedToDos)
-          // }}
-          onUpdateTodo={function (updates: any) {
-            const updatedToDos = toDos.map((x) => 
-            x === toDoItem ? ({...x, ...updates } as any) : x);
-          console.log(updates)
-          setToDos(updatedToDos);
-        }}
-          toDo={toDoItem}
-        />
-      ))}
-    </div>
+    <AllTasks
+      newTask={newTask}
+      showActive={showActive}
+      toDos={toDos}
+      showDone={showDone}
+      setToDos={setToDos}
+    />
   );
 }
 

@@ -1,15 +1,8 @@
 import { FormEvent } from "react";
-import { ToDo } from "../types/ToDo";
-
 
 
 
 export const NewTask = (props:{
-  newTask: () => void
-  showActive: () => void
-  toDos: ToDo[];
-  showDone: () => void
-  visibleTodos: ToDo[];
   handleFormSubmit: (event: FormEvent<HTMLFormElement>) => void
   
 }) => ( 
@@ -54,6 +47,3 @@ export const NewTask = (props:{
 </form>
 </div>
 );
-function setToDos(updatedToDos: any) {
-  throw new Error("Function not implemented.");
-}

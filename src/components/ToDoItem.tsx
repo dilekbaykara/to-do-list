@@ -3,45 +3,35 @@ import { ToDo } from "../types/ToDo";
 export function ToDoItem(props: {
   toDo: ToDo;
   onDeleteToDo: any;
-  // prioritySelect: any; // todo: remove this
-  // onCheckBoxCheck: any; // todo: remove this
-  // handleDateChange: any; // todo: remove this
-  onUpdateTodo: any; // condense to this
+  onUpdateTodo: any;
 }) {
   const handleOptionsChange = (event: any) => {
     const selectBox = event.target;
     const newValue = selectBox.value;
     const newPriority = parseInt(newValue);
-    // props.prioritySelect(newPriorityNumber); // todo: remove
-    // Homework
+  
     props.onUpdateTodo({ priority: newPriority })
   };
   const checkBoxCheck = (event: any) => {
     const checkBox = event.currentTarget.checked;
     const newCheckBoxValue = checkBox;
-    // console.log(checkBox);
-    // props.onCheckBoxCheck(newCheckBoxValue);// todo: remove
-    // Homework
+
     props.onUpdateTodo({ checked: newCheckBoxValue })
+    console.log(newCheckBoxValue)
   };
   const handleDateChange =(event: any) => {
     const newDate = event.target.value;
-    // props.handleDateChange(newDate); // todo: remove
+
     props.onUpdateTodo({ duedate: newDate })
 
     console.log(newDate)
   }
 
-  // {
-  //   // const newDate=
-
-  // }
-
   if (!props.toDo) {
     return <p>Missing To Do</p>;
   }
 
-  // console.log(props.toDo)
+
 
   return (
     <div
@@ -86,9 +76,6 @@ export function ToDoItem(props: {
           <span className="description">{props.toDo.description}</span>
         </div>
       </div>
-      {/* <div className="description-box">
-        <span className="description">{props.toDo.description}</span>
-      </div> */}
       <br />
     </div>
   );
