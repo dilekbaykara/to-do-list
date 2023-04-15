@@ -1,6 +1,7 @@
 import { ToDo } from "../types/ToDo";
 import { Greeting } from "./Greeting";
 import { ToDoItem } from "./ToDoItem";
+import { Button } from "./Button";
 
 export const ActiveTasks = (props: {
   newTask: () => void;
@@ -38,13 +39,24 @@ export const ActiveTasks = (props: {
           {activeToDos.length === 1 ? "Active Task" : "Active Tasks"}
         </div>
         <div className="status-container">
-          <button id="allButton" onClick={props.showAllTasks}>
+          <Button
+            id="allButton"
+            className="statusButton"
+            onClick={props.showAllTasks}
+          >
             All
-          </button>
-          <button id="activeButton">Active</button>
-          <button id="doneButton" onClick={props.showDone}>
+          </Button>
+
+          <Button id="activeButton" className="statusButton">
+            Active
+          </Button>
+          <Button
+            id="doneButton"
+            className="statusButton"
+            onClick={props.showDone}
+          >
             Done
-          </button>
+          </Button>
         </div>
       </div>
       <hr />
