@@ -16,17 +16,16 @@
   margin-right: 2rem;
 }
 
-.to-do-item[data-priority="1"]{
+.to-do-item[data-priority="1"] {
   background-color: #fdb06b;
 }
 
 .checkbox-title-container {
-    margin: 1rem;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: repeat(2, 50%);
-    align-items: center;
-
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 50%);
+  align-items: center;
 }
 
 #checkbox {
@@ -40,7 +39,7 @@
 }
 
 /* ADJUST THIS LATER*/
-#delete-div{
+#delete-div {
   justify-self: end;
   grid-column: 6;
   grid-row: 1;
@@ -50,30 +49,28 @@
   /* background-color: aliceblue; */
 }
 
-#delete{
+#delete {
   font-family: elza, sans-serif;
   font-weight: 400;
   font-style: normal;
   border: 1px solid #6889f7;
   border-radius: 19px;
-  color:#ffff;
+  color: #ffff;
   padding: 9px;
   background-color: #131b2d;
   width: 4rem;
-  
 }
 
-.check-title-div{
+.check-title-div {
   display: flex;
   align-items: center;
-  grid-column: 1/4; 
+  grid-column: 1/4;
   grid-row: 1;
-  
 }
 
-#delete:hover{
+#delete:hover {
   background-color: #6889f7;
-  color:#131b2d;
+  color: #131b2d;
 }
 
 /* .to-do-date {
@@ -110,20 +107,20 @@
   flex-direction: row;
 }
 
-.to-do-date-input{
+.to-do-date-input {
   font-family: elza, sans-serif;
   font-weight: 400;
   font-style: normal;
   border: 1px solid #131b2d;
   border-radius: 19px;
-  color:#131b2d;
-  background: rgb(255, 255, 255, .5);
+  color: #131b2d;
+  background: rgb(255, 255, 255, 0.5);
 }
 
-.to-do-date-input:active{
+.to-do-date-input:active {
   background: rgb(255, 255, 255);
 }
-.to-do-date-input:focus{
+.to-do-date-input:focus {
   background: rgb(255, 255, 255);
 }
 
@@ -148,7 +145,6 @@ form {
   flex-direction: column;
   align-items: center;
 }
-
 
 .input-field {
   display: flex;
@@ -203,24 +199,25 @@ select {
 }
 
 .select-field {
-    /* display: flex; */
-    height: 2rem;
-    width: 6rem;
-    border-radius: 10px;
-    background-color: #131b2d;
-    border: solid 1px #6889f7;
-    align-content: center;
-    font-family: elza, sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    color: #ffff;
-    align-self: center;
-    justify-content: center;
-    align-content: center;
-  }
+  /* display: flex; */
+  height: 2rem;
+  width: 6rem;
+  border-radius: 10px;
+  background-color: #131b2d;
+  border: solid 1px #6889f7;
+  align-content: center;
+  font-family: elza, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #ffff;
+  align-self: center;
+  justify-content: center;
+  align-content: center;
+}
 
- #completed-task-counter{
+#completed-task-counter {
   grid-column: 1/3;
   justify-self: start;
   width: 21rem;
- }
+  text-align: left;
+}

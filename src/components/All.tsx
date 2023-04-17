@@ -1,4 +1,5 @@
 import { ToDo } from "../types/ToDo";
+import { Button } from "./Button";
 import { Greeting } from "./Greeting";
 import { ToDoItem } from "./ToDoItem";
 
@@ -34,13 +35,35 @@ export const AllTasks = (props: {
         {props.toDos.length} {props.toDos.length === 1 ? "Task" : "Tasks"}
       </div>
       <div className="status-container">
-        <button id="allButton">All</button>
-        <button id="activeButton" onClick={props.showActive}>
+        <Button
+          id="allButton"
+          className="statusButton"
+          active={true}
+          color={"#6889f7"}
+          textColor={"#131b2d"}
+        >
+          All
+        </Button>
+        <Button
+          id="activeButton"
+          onClick={props.showActive}
+          className="statusButton"
+          active={false}
+          color={"#6889f7"}
+          textColor={"#131b2d"}
+        >
           Active
-        </button>
-        <button id="doneButton" onClick={props.showDone}>
+        </Button>
+        <Button
+          id="doneButton"
+          onClick={props.showDone}
+          className="statusButton"
+          active={false}
+          color={"#6889f7"}
+          textColor={"#131b2d"}
+        >
           Done
-        </button>
+        </Button>
       </div>
     </div>
     <hr />

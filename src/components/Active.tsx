@@ -43,17 +43,29 @@ export const ActiveTasks = (props: {
             id="allButton"
             className="statusButton"
             onClick={props.showAllTasks}
+            active={false}
+            color={"#6889f7"}
+            textColor={"#131b2d"}
           >
             All
           </Button>
 
-          <Button id="activeButton" className="statusButton">
+          <Button
+            id="activeButton"
+            className="statusButton"
+            active={true}
+            color={"#6889f7"}
+            textColor={"#131b2d"}
+          >
             Active
           </Button>
           <Button
             id="doneButton"
             className="statusButton"
             onClick={props.showDone}
+            active={false}
+            color={"#6889f7"}
+            textColor={"#131b2d"}
           >
             Done
           </Button>

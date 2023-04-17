@@ -10,14 +10,14 @@ body {
 }
 
 .greeting-container {
-  margin-top: 1rem;
+  margin-top: 2rem;
   margin-bottom: 0;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 35%);
-  margin-left: 1.5rem;
+  margin-left: 2rem;
   align-items: center;
-  margin-right: 1.5rem;
+  margin-right: 2rem;
 }
 
 .greeting {
@@ -33,6 +33,7 @@ body {
   grid-row: 1;
   height: 3rem;
   width: 7rem;
+  align-self: start;
 }
 
 .date-container {
@@ -69,12 +70,15 @@ hr {
   grid-template-columns: repeat(5, 1fr);
   font-size: 2rem;
   color: #6889f7;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .task-counter {
   grid-column: 1;
   grid-row: 1;
   width: 10rem;
+  text-align: left;
 }
 
 .status-container {
@@ -82,7 +86,7 @@ hr {
   grid-column: 5;
   grid-row: 1;
   width: 10rem;
-  justify-self: start;
+  justify-self: end;
   flex-direction: row;
 }
 
