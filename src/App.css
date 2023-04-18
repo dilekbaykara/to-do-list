@@ -107,6 +107,15 @@
   flex-direction: row;
 }
 
+.to-do-title-input {
+  font-family: elza, sans-serif;
+  font-weight: 500;
+  font-size: 1.5rem;
+  background-color: rgb(255, 255, 255, 0.5);
+  border: 1px solid #131b2d;
+  border-radius: 19px;
+}
+
 .to-do-date-input {
   font-family: elza, sans-serif;
   font-weight: 400;

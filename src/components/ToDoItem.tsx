@@ -9,29 +9,37 @@ export function ToDoItem(props: {
     const selectBox = event.target;
     const newValue = selectBox.value;
     const newPriority = parseInt(newValue);
-  
-    props.onUpdateTodo({ priority: newPriority })
+
+    props.onUpdateTodo({ priority: newPriority });
   };
   const checkBoxCheck = (event: any) => {
     const checkBox = event.currentTarget.checked;
     const newCheckBoxValue = checkBox;
 
-    props.onUpdateTodo({ checked: newCheckBoxValue })
-    console.log(newCheckBoxValue)
+    props.onUpdateTodo({ checked: newCheckBoxValue });
+    console.log(newCheckBoxValue);
   };
-  const handleDateChange =(event: any) => {
+  const handleDateChange = (event: any) => {
     const newDate = event.target.value;
 
-    props.onUpdateTodo({ duedate: newDate })
+    props.onUpdateTodo({ duedate: newDate });
 
-    console.log(newDate)
-  }
+    console.log(newDate);
+  };
+
+  const handleTitleChange = (event: any) => {
+    const newTitle = event.target.value;
+    props.onUpdateTodo({ title: newTitle });
+  };
+
+  const handleDescriptionChange = (event: any) => {
+    const newDescription = event.target.value;
+    props.onUpdateTodo({ description: newDescription });
+  };
 
   if (!props.toDo) {
     return <p>Missing To Do</p>;
   }
-
-
 
   return (
     <div
@@ -49,8 +57,12 @@ export function ToDoItem(props: {
               checked={props.toDo.checked}
             />
           </div>
-
-          <h2 className="to-do-title">{props.toDo.title}</h2>
+          <input
+            name="Title"
+            className="to-do-title-input"
+            value={props.toDo.title}
+            onChange={handleTitleChange}
+          />
         </div>
         <div id="delete-div">
           <select
@@ -67,13 +79,24 @@ export function ToDoItem(props: {
           </button>
         </div>
         <span className="to-do-date-container">
-        <input name="Date" type="date" className="to-do-date-input" value={props.toDo.duedate
-            ? new Date(props.toDo.duedate).toISOString().split('T')[0]
-            : undefined} onChange={handleDateChange}/>
-         
+          <input
+            name="Date"
+            type="date"
+            className="to-do-date-input"
+            value={
+              props.toDo.duedate
+                ? new Date(props.toDo.duedate).toISOString().split("T")[0]
+                : undefined
+            }
+            onChange={handleDateChange}
+          />
         </span>
         <div className="description-box">
-          <span className="description">{props.toDo.description}</span>
+          <textarea
+            className="description"
+            value={props.toDo.description}
+            onChange={handleDescriptionChange}
+          />
         </div>
       </div>
       <br />
