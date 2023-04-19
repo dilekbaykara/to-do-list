@@ -16,14 +16,20 @@ body {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 35%);
   margin-left: 2rem;
-  align-items: center;
   margin-right: 2rem;
 }
 
 .greeting {
+  display: flex;
   grid-column: 1 / span 4;
   grid-row: 1;
   text-align: left;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 2.5rem;
 }
 
 .task-button {
