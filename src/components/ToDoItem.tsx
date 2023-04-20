@@ -63,34 +63,34 @@ export function ToDoItem(props: {
             value={props.toDo.title}
             onChange={handleTitleChange}
           />
+          <span className="to-do-date-container">
+            <input
+              name="Date"
+              type="date"
+              className="to-do-date-input"
+              value={
+                props.toDo.duedate
+                  ? new Date(props.toDo.duedate).toISOString().split("T")[0]
+                  : undefined
+              }
+              onChange={handleDateChange}
+            />
+          </span>
+          <div id="delete-div">
+            <select
+              name="Priority"
+              className="select-field"
+              value={props.toDo.priority}
+              onChange={handleOptionsChange}
+            >
+              <option value="1">Important</option>
+              <option value="2">Normal</option>
+            </select>
+            <button id="delete" onClick={props.onDeleteToDo}>
+              Delete
+            </button>
+          </div>
         </div>
-        <div id="delete-div">
-          <select
-            name="Priority"
-            className="select-field"
-            value={props.toDo.priority}
-            onChange={handleOptionsChange}
-          >
-            <option value="1">Important</option>
-            <option value="2">Normal</option>
-          </select>
-          <button id="delete" onClick={props.onDeleteToDo}>
-            Delete
-          </button>
-        </div>
-        <span className="to-do-date-container">
-          <input
-            name="Date"
-            type="date"
-            className="to-do-date-input"
-            value={
-              props.toDo.duedate
-                ? new Date(props.toDo.duedate).toISOString().split("T")[0]
-                : undefined
-            }
-            onChange={handleDateChange}
-          />
-        </span>
         <div className="description-box">
           <textarea
             className="description"

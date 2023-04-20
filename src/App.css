@@ -14,6 +14,7 @@
   border-radius: 10px;
   margin-left: 2rem;
   margin-right: 2rem;
+  width: -webkit-fill-available;
 }
 
 .to-do-item[data-priority="1"] {
@@ -22,9 +23,10 @@
 
 .checkbox-title-container {
   margin: 1rem;
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 50%);
+  grid-template-rows: repeat(2, 50%); */
+  display: flexbox;
   align-items: center;
 }
 
@@ -64,8 +66,7 @@
 .check-title-div {
   display: flex;
   align-items: center;
-  grid-column: 1/4;
-  grid-row: 1;
+  gap: 1rem;
 }
 
 #delete:hover {
@@ -105,6 +106,19 @@
   align-items: center;
   align-content: center;
   flex-direction: row;
+}
+
+textarea {
+  font-family: elza, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  padding: 10px;
+  max-width: 100%;
+  line-height: 1.5;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #999;
+  background-color: rgb(255 255 255 / 60%);
 }
 
 .to-do-title-input {
