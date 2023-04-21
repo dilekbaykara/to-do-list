@@ -108,6 +108,7 @@
   align-items: center;
   align-content: center;
   flex-direction: row;
+  resize: horizontal;
 }
 
 textarea {
@@ -120,6 +121,7 @@ textarea {
   border-radius: 5px;
   border: 1px solid rgb(0, 0, 0);
   background-color: rgb(255 255 255 / 0);
+  resize: horizontal;
 }
 
 .to-do-title-input {
@@ -130,6 +132,7 @@ textarea {
   border: 1px solid #131b2d;
   border-radius: 19px;
   height: 2.5rem;
+  padding: 4px;
 }
 
 .to-do-date-input {
