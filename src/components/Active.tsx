@@ -18,7 +18,7 @@ export const ActiveTasks = (props: {
         <div className="greeting">
           <Greeting />
         </div>
-        <button className="task-button" onClick={props.newTask}>
+        <button id="task-button" onClick={props.newTask}>
           New Task
         </button>
         <div className="date-container">
