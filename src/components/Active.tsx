@@ -2,6 +2,7 @@ import { ToDo } from "../types/ToDo";
 import { Greeting } from "./Greeting";
 import { ToDoItem } from "./ToDoItem";
 import { Button } from "./Button";
+import Footer from "./Footer";
 
 export const ActiveTasks = (props: {
   newTask: () => void;
@@ -92,6 +93,7 @@ export const ActiveTasks = (props: {
             toDo={toDoItem}
           />
         ))}
+      <Footer />
       <div></div>
       <div></div>
     </div>

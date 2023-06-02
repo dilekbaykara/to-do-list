@@ -1,5 +1,6 @@
 import { ToDo } from "../types/ToDo";
 import { Button } from "./Button";
+import Footer from "./Footer";
 import { Greeting } from "./Greeting";
 import { ToDoItem } from "./ToDoItem";
 
@@ -84,5 +85,6 @@ export const AllTasks = (props: {
         toDo={toDoItem}
       />
     ))}
+    <Footer />
   </div>
 );
