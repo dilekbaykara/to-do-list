@@ -49,7 +49,7 @@ export function App(): JSX.Element {
     const newDueDate = new Date(data.Date as string);
     const timeZoneCorrectedDate = new Date(
       newDueDate.getTime() + newDueDate.getTimezoneOffset() * 60 * 1000
-    ); //
+    );
     debugger;
     setToDos([
       ...toDos,
